@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="order-service-consumer" />
+        <module name="es-mysql" />
+        <module name="demo" />
+        <module name="netty" />
+        <module name="user-service-provider" />
+        <module name="shuai-interface" />
+        <module name="rocketmq-demo" />
+        <module name="springcloudapi" />
+        <module name="elasticsearch" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo" target="8" />
+      <module name="elasticsearch" target="1.8" />
+      <module name="es-mysql" target="1.8" />
+      <module name="netty" target="8" />
+      <module name="oeder-service-consumer" target="1.8" />
+      <module name="order-service-consumer" target="1.8" />
+      <module name="rocketmq-demo" target="1.8" />
+      <module name="shuai-interface" target="1.5" />
+      <module name="shuaiinterface" target="1.5" />
+      <module name="springcloud1" target="1.5" />
+      <module name="springcloudapi" target="1.5" />
+      <module name="user-com.shuai.orderserviceconsumer.service-provider" target="1.8" />
+      <module name="user-service-provider" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="elasticsearch" options="-parameters" />
+      <module name="es-mysql" options="-parameters" />
+      <module name="oeder-service-consumer" options="-parameters" />
+      <module name="order-service-consumer" options="-parameters" />
+      <module name="rocketmq-demo" options="-parameters" />
+      <module name="user-com.shuai.orderserviceconsumer.service-provider" options="-parameters" />
+      <module name="user-service-provider" options="-parameters" />
+    </option>
+  </component>
+</project>

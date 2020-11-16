@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="oeder-service-consumer:war">
+    <output-path>$PROJECT_DIR$/oeder-service-consumer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>oeder-service-consumer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="oeder-service-consumer-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="oeder-service-consumer:war exploded" />
+    </root>
+  </artifact>
+</component>

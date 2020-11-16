@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="order-service-consumer:war">
+    <output-path>$PROJECT_DIR$/order-service-consumer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>order-service-consumer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="order-service-consumer-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="order-service-consumer:war exploded" />
+    </root>
+  </artifact>
+</component>
