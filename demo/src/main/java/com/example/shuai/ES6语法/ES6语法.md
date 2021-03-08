@@ -385,3 +385,352 @@ let a = {
 a.bar()  //undefined
 ```
 bar函数中的this指向父作用域，而a对象没有作用域，因此this不是a，打印结果为undefined
+# 字符串遍历
+```js
+let str = "hello";
+//1.for遍历
+for (let i = 0; i < str.length; i++) {
+    console.log(i, str[i]);     //i 索引    数值类型
+}
+
+//2.数组->for->for in
+let arr = [1, 2, 3];
+for (let i in arr) {
+    console.log(i, arr[i]);     //i 索引    字符串类型
+}
+
+//3.for... of
+for(let i of str){
+    console.log(i);     //数据
+}
+
+//4.解构
+let [a, b, c, d ,e] = str;
+console.log(a, b, c, d ,e);
+```
+# ES6 新增字符串方法
+```js
+//字符串新增方法：
+方法                返回值          作用
+includes('str')     boolean         判断字符串中包含子串
+endWith('str')      boolean         判断字符串以"str"结尾
+startWith('str')    boolean         判断字符串以"str"开头
+repeat(n)           重复拼接自身     重复n次输出字符串 repeat + repeat
+
+//不全方法: 补全字符串长度
+padStart(length, s);        字符串开头补全
+endStart(length, s);        字符串末尾补全
+```
+# ES6模板字符串
+模板字符串 反引号 ``
+1.支持换行 //空白会打印出来
+2.模板中传变量 ${变量}
+```js
+let obj = {
+    name: 'jack',
+    age: 20
+};
+console.log(`名称：${obj.name},年龄：${obj.age}`);  //名称：jack,年龄：20
+```
+# ES6 对于对象的扩展
+```js
+//1.对象的属性简写: 当对象的属性名和属性值（变量）名称一致，可省略赋值
+//2.对象的方法简写：
+let name = "jack";
+let age = 22;
+
+let obj = {
+    name,
+    age,
+    walk: function () {
+        console.log(this.name + " is walk");
+    },
+    say() {
+        console.log(this.name + ` say`);
+    }
+}
+```
+# ES6的Set结构
+## set结构：此结构中元素是唯一的，不能重复
+```js
+//方法：返回值是set可以连缀
+add(val)           //加元素
+delete(val)        //删元素
+has(val)           //判断是否包含元素     boolean
+clear()            //删除所有数据
+
+//属性：
+    size    //元素个数
+
+//使用new Set() 实例化
+```
+## set结构的遍历
+for of 遍历set   
+for of 遍历keys()   
+for of 遍历values()   
+for of 遍历对象实体 entries   
+forEach遍历 set   
+使用扩展运算符 和 解构 将set结构转为数组   
+```js
+// for of 遍历数据
+for (let i of set) {
+    console.log(i);     //1  2  5  3
+}
+
+// 遍历 keys    等于遍历set
+for (let i of set.keys()) {
+    console.log(i);
+}
+
+//遍历values
+for (let i of set.values()) {
+    console.log(i);
+}
+
+//遍历对象实体 entries
+for (let i of set.entries()) {
+    console.log(i[0]);
+}
+
+//解构的方式遍历对象实体
+for (let [k, v] of set.entries()) {
+    console.log(k, v);
+}
+
+// for  each遍历 set
+set.forEach(i => {
+    console.log(i);
+})
+```
+# ES6的Map结构
+## Map 结构：由于对象的属性只能接受字符串类型，所有产生了Map结构，优化对象结构
+方法：返回值是Map实例可以连缀   
+    set(key,val)        加元素   
+    get(key)            取元素   
+    has(key)            判断是否包含元素     boolean   
+    clear()             删除所有数据   
+使用new Map()实例化
+```js
+
+// 1.添加数据 set()
+map.set('name', 'jack').set('age', 22).set(0,100);
+console.log(map);
+
+// 2.获取数据 get()
+console.log(map.get(0));        //100
+console.log(map.get('name'))    //jack
+
+// 3.判断存在数据 has()
+console.log(map.has(0));        //true
+
+// 4.删除数据 delete()
+map.delete(0);
+console.log(map);       //Map(2) {"name" => "jack", "age" => 22}
+
+// 5.清空数据 clear()
+map.clear();
+console.log(map);       //Map(0) {}
+```
+## Map结构规则
+```js
+//1. map 支持数组作为构造函数的参数,但必须是二维数组
+// let arr = [1, 2, 3, 4, 5];  //Iterator value 1 is not an entry object
+let arr = [['name', 'jack'], ['age', 23]];
+let map = new Map(arr);
+console.log(map);   //Map(4) {"name" => "jack", "age" => 23}
+
+
+// 2.key 不能重复，val可以重复, key如果重复会将原来的值覆盖
+map.set('name','tom');
+map.set('hob','sing');
+console.log(map);   //Map(5) {"name" => "tom", "age" => 23, "hob" => "sing"}
+```
+## Map的遍历
+```js
+// 1.let of 遍历map
+for (let i of map) {
+    console.log(i[0], i[1]);
+}
+
+// 2.foreach 遍历 map
+map.forEach((v, k) => {
+    console.log(k, v);
+})
+
+// 3.let of 遍历map.keys
+for (let k of map.keys()) {
+    console.log(k, map.get(k));
+}
+
+// 4.let of 遍历map.values
+for (let v of map.values()) {
+    console.log(v);
+}
+
+// 5.let of 遍历map.entries
+for (let i of map.entries()) {
+    console.log(i[0], i[1]);
+}
+
+// 6.let of 遍历 map.entries + 解构
+for (let [k, v] of map.entries()) {
+    console.log(k, v);
+}
+```
+# ES6的set结构、map结构类型间转换
+```js
+Set 和 数组
+    1.set -> 数组
+        1.Array.from();
+        2.遍历set然后push
+        3.扩展运算符
+
+    2.数组 -> set
+        1.new Set(arr);
+    
+Map 和 对象 和 string
+    1.map -> 对象 -> String
+        1.forEach遍历Map -> 对象 -> JSON.stringify
+    2.String -> 对象 -> map
+        1.JSON.parse -> 对象 -> for...in 遍历对象 -> Map.add()
+```
+## Set 和 数组之间
+```js
+let set = new Set();
+set.add(1).add(2).add(3).add(2);
+
+// 1.Array.from();
+var arr = Array.from(set);
+console.log(arr);
+
+// 2.遍历set然后push
+var arr  = [];
+set.forEach(i=>{
+    arr.push(i);
+});
+console.log(arr);
+
+// 3.扩展运算符
+var arr = [...set];
+console.log(arr);
+```
+## map、对象和字符串之间
+```js
+let map = new Map();
+map.set('name', 'jack').set('age', 22).set('tel', 151);
+
+// 1.map -> 对象 -> String
+var obj = {};
+map.forEach((v,k)=>{
+    obj[k] = v;
+})
+console.log(obj);
+
+var str = JSON.stringify(obj);
+console.log(str);
+
+// 2.String -> 对象 -> map
+var obj1 = JSON.parse(str);
+var map1 = new Map();
+for(let i in obj1){
+    map1.set(i,obj1[i]);
+}
+console.log(map1);
+```
+# rest 和 扩展运算符区别
+## rest参数，出现在函数参数位置
+作用： 离散数据 -> 数组
+```js
+function fn(...rest) {
+    console.log(rest);
+}
+fn(100, 110, 120);    //(3) [100, 110, 120]
+```
+## 扩展运算符出现在非参数位置
+数组 -> 离散的数据
+拆分伪数组： NodeList HTMLCollection arguments...
+```js
+let arr = [1, 2, 3, 4, 5];
+console.log(...arr);    //1 2 3 4 5    
+
+function fn1() {
+    console.log(arguments);     //Arguments(3) [2, 3, 4]
+    console.log(...arguments);  //2 3 4
+}
+fn1(2,3,4);
+```
+# ES6 面向对象
+## class 类、模板
+构造器：当类被实例化时，自动执行构造器   
+每个类必须至少一个构造器，若没有，系统自动添加一个无参构造器   
+构造函数，不能主动调用   
+## set 和 get 设置和获取属性
+get 不能传递参数
+只有当有set方法时才可以写get方法，同时出现
+## 静态方法
+类自身的方法，不用实例化即可调用
+不会被实例继承,直接通过类来调用
+## 静态属性
+类名.属性名 = 值;
+## extends 实现继承
+继承是单向的   
+被继承的类属于父类，基类，也称超类   
+静态方法可以被子类继承   
+继承属性super()必须放在构造器第一句   
+一个父类可以有多个子类，一个子类只有一个父类   
+## 注意
+父类可调用自己的成员方法   
+父类可以调自己的静态方法   
+父类不能调子类的成员方法   
+子类的实例可以调父类成员方法   
+子类的实例不能调父类静态方法   
+子类可以调父类静态方法   
+```js
+class Person {
+    constructor(uname, uage) {
+        this.uname = uname;
+        this.uage = uage;
+    }
+    //成员方法
+    walk() {
+        console.log(`${this.uname}正在奔跑！`);
+    }
+
+    // 静态方法:类自身的方法
+    static cry() {
+        console.log('人生下来就会哭！');
+    }
+}
+// 静态属性
+Person.living = 'earth';
+
+
+//学生类继承Person类
+class Student extends Person {
+    constructor(sname, sage, sno) {
+        super(sname, sage);  //此句必须在构造器第一句
+        this.sno = sno;
+    }
+
+    // 成员方法
+    study() {
+        console.log(`${this.sname}在学习呢！`);
+    }
+    
+    //set 访问器 控制属性的设置
+    set sage(age) {
+       
+    }
+
+    // get 访问器，获取属性
+    get sage() {
+        
+    }
+}
+
+//创建类的实例   类的实例化
+var stu = new Student('王飒', 23, '001');
+```
+
+
+https://www.cnblogs.com/paddix/p/5405678.html

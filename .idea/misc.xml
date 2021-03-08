@@ -20,8 +20,13 @@
         <option value="$PROJECT_DIR$/es-mysql/pom.xml" />
         <option value="$PROJECT_DIR$/rocketmq-demo/pom.xml" />
         <option value="$PROJECT_DIR$/springcloud1/pom.xml" />
+        <option value="$PROJECT_DIR$/springsourcecode/pom.xml" />
+        <option value="$PROJECT_DIR$/springbootsourcecode/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-spring-boot-starter/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/spring-source-code/out" />
+  </component>
 </project>

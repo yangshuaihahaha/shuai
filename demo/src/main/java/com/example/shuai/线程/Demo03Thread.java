@@ -25,12 +25,7 @@ public class Demo03Thread {
 
     public static void main(String[] args) {
         Demo03Thread demo03Thread = new Demo03Thread();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                demo03Thread.setNameAndBalance("张三", 100.0);
-            }
-        }).start();
+        new Thread(() -> demo03Thread.setNameAndBalance("张三", 100.0)).start();
         System.out.println(demo03Thread.getBalance("张三"));
     }
 }

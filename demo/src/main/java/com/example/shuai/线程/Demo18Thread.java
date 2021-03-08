@@ -10,7 +10,7 @@ public class Demo18Thread {
     public final int id;
     public final String name;
 
-    public Demo18Thread(EventSource<EventListener> source) {
+    public Demo18Thread(src.main.java.com.example.shuai.线程.EventSource<EventListener> source) {
         id = 1;
         source.registerListener(new EventListener() {  //内部类是可以直接访问外部类的成员变量的（外部类引用this被内部类获取了）
             public void onEvent(Object obj) {
