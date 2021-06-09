@@ -23,6 +23,8 @@
         <option value="$PROJECT_DIR$/springsourcecode/pom.xml" />
         <option value="$PROJECT_DIR$/springbootsourcecode/pom.xml" />
         <option value="$PROJECT_DIR$/demo-spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-cas/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud2021/pom.xml" />
       </list>
     </option>
   </component>

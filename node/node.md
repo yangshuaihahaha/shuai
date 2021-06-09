@@ -27,6 +27,57 @@ Node.js底层是C++（V8也是C++写的）。底层代码中，近半数都用�
 说是三个特点，实际上是一个特点，离开谁都不行，都玩儿不转了。
 Node.js中所有的I/O都是异步的，回调函数，套回调函数。
 
+第一步：
+    每个node.js进程只有一个主线程在执行程序代码，形成一个执行栈
+第二步：
+    主线程之外，还有一个事件队列。当用户异步操作到来时，node都会放到事件队列中，此时不会立即执行它，代码也不会被阻塞，继续往下走，直到主代码执行完毕
+第三步：
+    主线程执行完毕，然后通过事件队列，取到开头的第一个事件，从线程池中分配一个线程去执行这个事件，接下来继续取出第二个事件，再从线程池中分配一个线程去执行
+    然后第三个第四个。主线程不断检查事件队列中是否还有未执行的线程，直到所有的事件都执行完毕，此后每当有新的事件加入到事件队列，都会通知主线程按照顺序交给事件队列处理
+    当所有事件执行完毕后，会通知主线程，主线程执行回掉，线程归还给线程池
+主线程不断重复上面的第三步
+```
+let a;
+const b = new Promise((resolve, reject) => {
+  console.log('promise1');
+  resolve();
+}).then(() => {
+  console.log('promise2');
+}).then(() => {
+  console.log('promise3');
+}).then(() => {
+  console.log('promise4');
+});
+
+a = new Promise(async (resolve, reject) => {
+  console.log(a);
+  await b;
+  console.log(a);
+  console.log('after1');
+  await a
+  resolve(true);
+  console.log('after2');
+});
+
+console.log('end');
+
+promise1
+undefined
+end
+promise2
+promise3
+promise4
+Promise { pending }
+after1
+```
+第一个输出 promise1，是因为 Promise 里的方法立即执行。接着调用 resolve，只不过 then 里的方法等下一个周期
+第二个输出 undefined，是因为立即执行执行 a 内部的方法，先 console.log(a)，但此时的 a 还没赋值给左边的变量，所以只能是 undefined。然后 await b 就得等下一个周期执行了。
+第三个输出 end，自然不意外。
+接着输出 promise2，promise3，promise4，是因为 await b 等待他执行完了，才轮到 a 内部继续执行。
+输出 Promise { pending }，脑筋转了以下才想通，事件都进入了循环了，a 肯定已经被赋值成了 Promise 对象。所以第二遍 console.log(a)，自然就输出这个了。
+输出 after1 不奇怪。
+但是随后的 await a 是个什么奇怪的操作，想半天没搞懂为何最后不输出 after2，调试得知根本就执行不到 await a 以后的代码上，想不懂。
+更新：和不少朋友交流后，我得出了结论，await a 时，a 是必须等待 Promise 的状态从 pending 到 fullfilled 才会继续往下执行，可 a 的状态是一直得不到更改的，所以无法执行下面的逻辑。只要在 await a 上面加一行 resolve() 就能让后面的 after 2 得到输出。
 
 # 2、Node.js适合开发什么
 Node.js适合用来开发什么样的应用程序呢？

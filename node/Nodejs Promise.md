@@ -303,3 +303,35 @@ var p2 = new Promise(function(resolve, reject) {
     resolve(p1);  
 })
 ```
+
+如何取消一个Promise？
+当有若干个promise, p1, p2, p3…在调用， let p = Promise.race([p1, p2, p3,…])的时候，返回的p也是一个promise。那么p什么时候会被resolve或者被reject呢？
+看race我们知道它是竞速或赛跑的意思，所以p1, p2, p3 … 最先一个被resolve或者被reject的结果就是p的resolve或者reject的结果。所以后续的promise的resolve和reject都不会再被执行了。
+代码很简单，其实够短小精悍。
+```js
+//传入一个正在执行的promise
+function getPromiseWithAbort(p){
+    let obj = {};
+    let p1 = new Promise(function(resolve, reject){
+        obj.resolve = resolve;
+        obj.reject = reject;
+    });
+    obj.promise = Promise.race([p, p1]);
+    return obj;
+}
+//上面的函数我们可以看出来，只要不调用返回结果中的resolve和reject，那么返回结果中的promise就是传入的promise。而当我们调用了返回结果中的resolve或者reject，那么传入的promise在也不会生效了，由此达到来取消它的目的。
+  
+var promise  = new Promise((resolve)=>{
+ setTimeout(()=>{
+  resolve('123')
+ },3000)
+})
+
+var obj = getPromiseWithAbort(promise)
+
+obj.promise.then(res=>{console.log(res)})
+
+//如果要取消
+obj.abort('取消执行')
+```
+

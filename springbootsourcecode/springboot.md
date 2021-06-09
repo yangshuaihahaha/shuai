@@ -308,6 +308,8 @@ public void run(String... strings) throws Exception {
 - RequestMapping 具有类属性的，可以进行 GET,POST,PUT 或者其它的注释中具有的请求方法。
 - GetMapping 是 GET 请求方法中的一个特例。它只是 ResquestMapping 的一个延伸，目的是为了提高清晰度。
 
+# springboot
+react响应式编程，以及web flux
 
 
 

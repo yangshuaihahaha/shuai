@@ -79,6 +79,36 @@ slop参数告诉match_phrase查询词条能够相隔多远时仍然将文档视�
 ## 8，query_string查询text类型的字段。
 和match_phrase区别的是，query_string查询text类型字段，不需要连续，顺序还可以调换。
 
-
+# nested数据类型场景
+比如有以下数据结构
+"group": "fans",
+"user": [
+    {
+        "first": "join",
+        "last": "smith"
+    },
+    {
+        "first": "alice",
+        "last": "white"
+    }
+]
+es最终会处理成这样
+"group": "fans",
+"user.first": ["join", "zhangsan"],
+"user.last": ["smith", "lisi"]
+但我们搜索
+get my_index/_search
+{
+    "query": {
+        "bool": {
+            "must": {
+                {"match": {"user.first": "alice"}},
+                {"match": {"user.last": "smith"}}
+            }
+        }
+    }
+}
+我们是可以找到两条记录的，但是我们没有存储过一个user的first为"alice"并且last为"smith"
+我们可以将user的type设置为嵌入式type: nested
 
 

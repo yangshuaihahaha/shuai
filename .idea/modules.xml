@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" filepath="$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud2021/cloud-provider-payment8001/cloud-provider-payment8001.iml" filepath="$PROJECT_DIR$/cloud2021/cloud-provider-payment8001/cloud-provider-payment8001.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud2021/cloud2021.iml" filepath="$PROJECT_DIR$/cloud2021/cloud2021.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" filepath="$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/elasticsearch/elasticsearch.iml" filepath="$PROJECT_DIR$/elasticsearch/elasticsearch.iml" />
@@ -14,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/shuai.iml" filepath="$PROJECT_DIR$/.idea/shuai.iml" />
       <module fileurl="file://$PROJECT_DIR$/shuai-interface/shuai-interface.iml" filepath="$PROJECT_DIR$/shuai-interface/shuai-interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring/spring.iml" filepath="$PROJECT_DIR$/spring/spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-cas/spring-boot-cas.iml" filepath="$PROJECT_DIR$/spring-boot-cas/spring-boot-cas.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-source/spring-source.iml" filepath="$PROJECT_DIR$/spring-source/spring-source.iml" />
       <module fileurl="file://$PROJECT_DIR$/springbootsourcecode/springbootsourcecode.iml" filepath="$PROJECT_DIR$/springbootsourcecode/springbootsourcecode.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud1/springcloud1.iml" filepath="$PROJECT_DIR$/springcloud1/springcloud1.iml" />
@@ -21,6 +24,7 @@
       <module fileurl="file://$PROJECT_DIR$/springsourcecode/springsourcecode.iml" filepath="$PROJECT_DIR$/springsourcecode/springsourcecode.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/src/test/test.iml" filepath="$PROJECT_DIR$/user-service-provider/src/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/user-service-provider.iml" filepath="$PROJECT_DIR$/user-service-provider/user-service-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webpack/webpack.iml" filepath="$PROJECT_DIR$/webpack/webpack.iml" />
     </modules>
   </component>
 </project>

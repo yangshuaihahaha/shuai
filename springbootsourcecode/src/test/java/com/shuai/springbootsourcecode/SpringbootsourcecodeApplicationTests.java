@@ -12,7 +12,7 @@ class SpringbootsourcecodeApplicationTests {
     @Test
     void contextLoads() {
         List add = new ArrayList();
-        add.iterator()
+        add.iterator();
     }
 
 }

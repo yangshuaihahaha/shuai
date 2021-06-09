@@ -7,21 +7,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo" />
-        <module name="es-mysql" />
-        <module name="netty" />
-        <module name="order-service-consumer" />
-        <module name="user-service-provider" />
-        <module name="shuai-interface" />
-        <module name="springbootsourcecode" />
-        <module name="demo-spring-boot-starter" />
-        <module name="rocketmq-demo" />
         <module name="springsourcecode" />
+        <module name="demo" />
+        <module name="order-service-consumer" />
+        <module name="netty" />
+        <module name="shuai-interface" />
+        <module name="cloud-provider-payment8001" />
         <module name="springcloudapi" />
+        <module name="spring-boot-cas" />
+        <module name="demo-spring-boot-starter" />
+        <module name="user-service-provider" />
+        <module name="springbootsourcecode" />
         <module name="elasticsearch" />
+        <module name="es-mysql" />
+        <module name="rocketmq-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cloud-provider-payment8001" target="1.8" />
+      <module name="cloud2021" target="1.8" />
       <module name="demo" target="8" />
       <module name="demo-spring-boot-starter" target="1.8" />
       <module name="elasticsearch" target="1.8" />
@@ -32,6 +36,7 @@
       <module name="rocketmq-demo" target="1.8" />
       <module name="shuai-interface" target="1.5" />
       <module name="shuaiinterface" target="1.5" />
+      <module name="spring-boot-cas" target="1.8" />
       <module name="springbootsourcecode" target="1.8" />
       <module name="springcloud1" target="1.5" />
       <module name="springcloudapi" target="1.5" />
@@ -42,12 +47,14 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-provider-payment8001" options="-parameters" />
       <module name="demo-spring-boot-starter" options="-parameters" />
       <module name="elasticsearch" options="-parameters" />
       <module name="es-mysql" options="-parameters" />
       <module name="oeder-service-consumer" options="-parameters" />
       <module name="order-service-consumer" options="-parameters" />
       <module name="rocketmq-demo" options="-parameters" />
+      <module name="spring-boot-cas" options="-parameters" />
       <module name="springbootsourcecode" options="-parameters" />
       <module name="user-com.shuai.orderserviceconsumer.service-provider" options="-parameters" />
       <module name="user-service-provider" options="-parameters" />

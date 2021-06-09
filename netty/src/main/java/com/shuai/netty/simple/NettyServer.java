@@ -24,7 +24,6 @@ public class NettyServer {
         ServerBootstrap bootstrap = new ServerBootstrap();
 
 
-
         bootstrap.group(bossGroup, workerGroup)//设置两个线程组
                 .channel(NioServerSocketChannel.class)//使用NioServerSocketChannel作为服务器通道的实现
                 .option(ChannelOption.SO_BACKLOG, 128)//设置线程队列得到的连接数
