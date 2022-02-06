@@ -20,7 +20,6 @@ public class IdGenerate {
         return zooKeeper.create("/id", new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
     }
 
-
     public static void main(String[] args) throws Exception {
         zooKeeper = new ZooKeeper(IP, 5000, new ZKWatcher());
         countDownLatch.await();

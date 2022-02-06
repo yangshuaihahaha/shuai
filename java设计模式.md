@@ -452,7 +452,6 @@
         安全代理，这种方式通常用于控制不同种类客户对真实对象的访问权限。
         智能指引，主要用于调用目标对象时，代理附加一些额外的处理功能。例如，增加计算真实对象的引用次数的功能，这样当该对象没有被引用时，就可以自动释放它。
         延迟加载，指为了提高系统的性能，延迟对目标的加载。例如，Hibernate 中就存在属性的延迟加载和关联表的延时加载。
-            
     示例1（原始静态代理）：
         public class ProxyTest {
             public static void main(String[] args) {
@@ -637,77 +636,174 @@
         产品的组成部分必须相同，这限制了其使用范围。
         如果产品的内部变化复杂，如果产品内部发生变化，则建造者也要同步修改，后期维护成本较大。
     建造者（Builder）模式和工厂模式的关注点不同：建造者模式注重零部件的组装过程，而工厂方法模式更注重零部件的创建过程，但两者可以结合使用。
-    结构：
+    第一种结构：
         产品角色（Product）：它是包含多个组成部件的复杂对象，由具体建造者来创建其各个零部件。
         抽象建造者（Builder）：它是一个包含创建产品各个子部件的抽象方法的接口，通常还包含一个返回复杂产品的方法 getResult()。
         具体建造者(Concrete Builder）：实现 Builder 接口，完成复杂产品的各个部件的具体创建方法。
         指挥者（Director）：它调用建造者对象中的部件构造与装配方法完成复杂对象的创建，在指挥者中不涉及具体产品的信息。
-    示例：
-        (1) 产品角色：包含多个组成部件的复杂对象。
-        class Product {
-            private String partA;
-            private String partB;
-            private String partC;
-            public void setPartA(String partA) {
-                this.partA = partA;
+        示例：
+            (1) 产品角色：包含多个组成部件的复杂对象。
+            class Product {
+                private String partA;
+                private String partB;
+                private String partC;
+                public void setPartA(String partA) {
+                    this.partA = partA;
+                }
+                public void setPartB(String partB) {
+                    this.partB = partB;
+                }
+                public void setPartC(String partC) {
+                    this.partC = partC;
+                }
+                public void show() {
+                    //显示产品的特性
+                }
             }
-            public void setPartB(String partB) {
-                this.partB = partB;
+            (2) 抽象建造者：包含创建产品各个子部件的抽象方法。
+            abstract class Builder {
+                //创建产品对象
+                protected Product product = new Product();
+                public abstract void buildPartA();
+                public abstract void buildPartB();
+                public abstract void buildPartC();
+                //返回产品对象
+                public Product getResult() {
+                    return product;
+                }
             }
-            public void setPartC(String partC) {
-                this.partC = partC;
+            (3) 具体建造者：实现了抽象建造者接口。
+            public class ConcreteBuilder extends Builder {
+                public void buildPartA() {
+                    product.setPartA("建造 PartA");
+                }
+                public void buildPartB() {
+                    product.setPartB("建造 PartB");
+                }
+                public void buildPartC() {
+                    product.setPartC("建造 PartC");
+                }
             }
-            public void show() {
-                //显示产品的特性
+            (4) 指挥者：调用建造者中的方法完成复杂对象的创建。
+            class Director {
+                private Builder builder;
+                public Director(Builder builder) {
+                    this.builder = builder;
+                }
+                //产品构建与组装方法
+                public Product construct() {
+                    builder.buildPartA();
+                    builder.buildPartB();
+                    builder.buildPartC();
+                    return builder.getResult();
+                }
             }
-        }
-        (2) 抽象建造者：包含创建产品各个子部件的抽象方法。
-        abstract class Builder {
-            //创建产品对象
-            protected Product product = new Product();
-            public abstract void buildPartA();
-            public abstract void buildPartB();
-            public abstract void buildPartC();
-            //返回产品对象
-            public Product getResult() {
-                return product;
+            (5) 客户类。
+            public class Client {
+                public static void main(String[] args) {
+                    Builder builder = new ConcreteBuilder();
+                    Director director = new Director(builder);
+                    Product product = director.construct();
+                    product.show();
+                }
             }
-        }
-        (3) 具体建造者：实现了抽象建造者接口。
-        public class ConcreteBuilder extends Builder {
-            public void buildPartA() {
-                product.setPartA("建造 PartA");
-            }
-            public void buildPartB() {
-                product.setPartB("建造 PartB");
-            }
-            public void buildPartC() {
-                product.setPartC("建造 PartC");
-            }
-        }
-        (4) 指挥者：调用建造者中的方法完成复杂对象的创建。
-        class Director {
-            private Builder builder;
-            public Director(Builder builder) {
-                this.builder = builder;
-            }
-            //产品构建与组装方法
-            public Product construct() {
-                builder.buildPartA();
-                builder.buildPartB();
-                builder.buildPartC();
-                return builder.getResult();
-            }
-        }
-        (5) 客户类。
-        public class Client {
-            public static void main(String[] args) {
-                Builder builder = new ConcreteBuilder();
-                Director director = new Director(builder);
-                Product product = director.construct();
-                product.show();
-            }
-        }
+    第二种结构：
+        通过静态内部类方式实现零件无序装配话构造，这种方式使用更加灵活，更符合定义。内部有复杂对象的默认实现，使用时可以根据用户需求自由定义更改内容，并且无需改变具体的构造方式。就可以生产出不同复杂产品
+        主要有三个角色：抽象建造者、具体建造者、产品
+        比如麦当劳的套餐，服务员（具体建造者）可以随意搭配任意几种产品（零件）组成一款套餐（产品），然后出售给客户。
+        具体代码
+            建造者：Builder.java
+                abstract class Builder {
+                    //汉堡
+                    abstract Builder bulidA(String mes);
+                    //饮料
+                    abstract Builder bulidB(String mes);
+                    //薯条
+                    abstract Builder bulidC(String mes);
+                    //甜品
+                    abstract Builder bulidD(String mes);
+                    //获取套餐
+                    abstract Product build();
+                }
+            产品：Product.java
+                public class Product {
+                    private String buildA="汉堡";
+                    private String buildB="饮料";
+                    private String buildC="薯条";
+                    private String buildD="甜品";
+                    public String getBuildA() {
+                        return buildA;
+                    }
+                    public void setBuildA(String buildA) {
+                        this.buildA = buildA;
+                    }
+                    public String getBuildB() {
+                        return buildB;
+                    }
+                    public void setBuildB(String buildB) {
+                        this.buildB = buildB;
+                    }
+                    public String getBuildC() {
+                        return buildC;
+                    }
+                    public void setBuildC(String buildC) {
+                        this.buildC = buildC;
+                    }
+                    public String getBuildD() {
+                        return buildD;
+                    }
+                    public void setBuildD(String buildD) {
+                        this.buildD = buildD;
+                    }
+                    @Override
+                        public String toString() {
+                            return buildA+"\n"+buildB+"\n"+buildC+"\n"+buildD+"\n"+"组成套餐";
+                        }
+                }
+            具体建造者：ConcreteBuilder.java
+                public class ConcreteBuilder extends Builder{
+                    private Product product;
+                    public ConcreteBuilder() {
+                        product = new Product();
+                    }
+                    @Override
+                    Product build() {
+                        return product;
+                    }
+                    @Override
+                    Builder bulidA(String mes) {
+                        product.setBuildA(mes);
+                        return this;
+                    }
+                    @Override
+                    Builder bulidB(String mes) {
+                        product.setBuildB(mes);
+                        return this;
+                    }
+                    @Override
+                    Builder bulidC(String mes) {
+                        product.setBuildC(mes);
+                        return this;
+                    }
+                    @Override
+                    Builder bulidD(String mes) {
+                        product.setBuildD(mes);
+                        return this;
+                    }
+                }
+            测试类：Test.java
+                public class Test {
+                    public static void main(String[] args) {
+                         ConcreteBuilder concreteBuilder = new ConcreteBuilder();
+                         Product build = concreteBuilder
+                                .bulidA("牛肉煲")
+                                .bulidC("全家桶")
+                                .bulidD("冰淇淋")
+                                .build();
+                        System.out.println(build.toString());
+                    }
+                }
+          
 # 装饰者模式
     指的是不改变现有对象结构的情况下，动态的给对象加一个额外的功能
     优点：
@@ -769,3 +865,122 @@
                 System.out.println("为具体构件角色增加额外的功能addedFunction()");
             }
         }
+# 策略模式
+为了更好的理解这个模式，我们再举一个例子，我们出去旅游的时候可能有很多种出行方式，比如说我们可以坐火车、坐高铁、坐飞机等等。
+不管我们使用哪一种出行方式，最终的目的地都是一样的。也就是选择不同的方式产生的结果都是一样的。
+1，实现策略模式
+    策略模式把对象本身和运算规则区分开来，因此我们整个模式也分为三个部分。
+    - 环境类(Context):用来操作策略的上下文环境，也就是我们游客。
+    - 抽象策略类(Strategy):策略的抽象，出行方式的抽象
+    - 具体策略类(ConcreteStrategy):具体的策略实现，每一种出行方式的具体实现。
+    第一步：定义抽象策略接口：
+        interface TravelStrategy {
+            public function travelAlgorithm();
+        }
+    第二步：具体策略类
+        public class TrainStrategy implements TravelStrategy {
+            @Override
+            public void travelStyle() {
+                System.out.println("乘坐火车......");
+            }
+        }
+        public class HighTrainStrategy implements TravelStrategy {
+            @Override
+            public void travelStyle() {
+                System.out.println("乘坐高铁......");
+            }
+        }
+        public class AirStrategy implements TravelStrategy {
+            @Override
+            public void travelStyle() {
+                System.out.println("乘坐飞机......");
+            }
+        }
+    第三步：环境类实现
+        public class Traveler {
+            TravelStrategy travelStrategy;
+            public void setTravelStrategy (TravelStrategy travelStrategy) {
+                this.travelStrategy = travelStrategy;
+            }
+            public void travelStyle () {
+                travelStrategy = travelStrategy.travelStyle();
+            }
+            public static void main(String[] args) {
+                Traveler traveler = new Traveler();
+                //设置出行策略
+                traveler.settravelStrategy(new TrainStrategy());
+                traveler.settravelStrategy(new HighTrainStrategy());
+                traveler.settravelStrategy(new AirStrategy());
+                traveler.travelStyle();
+            }
+        }
+2，分析策略模式
+    优点：
+        们之前在选择出行方式的时候，往往会使用if-else语句，也就是用户不选择A那么就选择B这样的一种情况。这种情况耦合性太高了，而且代码臃肿，有了策略模式我们就可以避免这种现象，
+        策略模式遵循开闭原则，实现代码的解耦合。扩展新的方法时也比较方便，只需要继承策略接口就好了
+    缺点：
+        客户端必须知道所有的策略类，并自行决定使用哪一个策略类。
+        策略模式会出现很多的策略类。
+        context在使用这些策略类的时候，这些策略类由于继承了策略接口，所以有些数据可能用不到，但是依然初始化了。
+3，与其他模式区别
+    （1）与状态模式的区别
+        策略模式只是条件选择方法，只执行一次方法，而状态模式是随着状态的改变不停地更改执行方法。举个例子，就好比我们旅游，对于策略模式我们只需要选择其中一种出行方法就好了，但是状态模式不一样，可能我们到了A地点选择的是火车，到了B地点又选择飞机，根据不同的状态选择不同的出行方式。
+    （2）与工厂模式的区别
+        工厂模式是创建型模式 ，它关注对象创建，提供创建对象的接口，让对象的创建与具体的使用客户无关。 策略模式是对象行为型模式 ，它关注行为和算法的封装 。再举个例子，还是我们出去旅游，对于策略模式我们只需要选择其中一种出行方法就好，但是工厂模式不同，工厂模式是你决定哪种旅行方案后，由工厂代替你去构建具体方案（工厂代替你去买火车票）。
+# 状态模式
+状态模式定义：对象行为的变化是由于状态的变化引入，那么即当内部状态发生变化的时候，就会改变对象的行为，而这种改变视乎就改变了整个类。
+业务场景：
+    假设我们现在有一个糖果机项目，那么我们知道正常一般糖果机提供给用户的行为有这么几种：投入硬币、转动曲柄、退出硬币几种行为；
+    那么糖果机呢一般有这几中状态，待机状态、持有硬币的准备状态、运行状态即正在售出状态和初始状态 这么几种正常状态。 我们发现处于不同状态的时候，持有的行为是不一样的
+主要角色：
+    1，环境类（Context）角色：也称为上下文，它定义了客户端需要的接口，内部维护一个当前状态，并负责具体状态的切换。
+    2，抽象状态（State）角色：定义一个接口，用以封装环境对象中的特定状态所对应的行为，可以有一个或多个行为。
+    3，具体状态（Concrete State）角色：实现抽象状态所对应的行为，并且在需要的情况下进行状态切换。
+代码实现：
+    public class StatePatternClient {
+        public static void main(String[] args) {
+            Context context = new Context();    //创建环境      
+            context.Handle();    //处理请求
+            context.Handle();
+            context.Handle();
+            context.Handle();
+        }
+    }
+    //环境类
+    class Context {
+        private State state;
+        //定义环境类的初始状态
+        public Context() {
+            this.state = new ConcreteStateA();
+        }
+        //设置新状态
+        public void setState(State state) {
+            this.state = state;
+        }
+        //读取状态
+        public State getState() {
+            return (state);
+        }
+        //对请求做处理
+        public void Handle() {
+            state.Handle(this);
+        }
+    }
+    //抽象状态类
+    abstract class State {
+        public abstract void Handle(Context context);
+    }
+    //具体状态A类
+    class ConcreteStateA extends State {
+        public void Handle(Context context) {
+            System.out.println("当前状态是 A.");
+            context.setState(new ConcreteStateB());
+        }
+    }
+    //具体状态B类
+    class ConcreteStateB extends State {
+        public void Handle(Context context) {
+            System.out.println("当前状态是 B.");
+            context.setState(new ConcreteStateA());
+        }
+    }

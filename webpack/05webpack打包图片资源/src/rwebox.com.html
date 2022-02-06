@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<!-- saved from url=(0134)http://localhost:8080/rwe-web/?page=studyAdministration%2Flocations.page%3FstudyIdOrUuid%3D22&nav=studyAdministration%2Flocations.page -->
+<html lang="en"><!--<![endif]--><!-- BEGIN HEAD --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>rwebox.com</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<link href="./rwebox.com_files/font.css" rel="stylesheet" type="text/css">
+	<link href="./rwebox.com_files/vendor.css" rel="stylesheet" type="text/css">
+	<link href="./rwebox.com_files/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="./rwebox.com_files/theme.css" rel="stylesheet" type="text/css">
+	<link href="http://localhost:8080/rwe-web/images/logo-title.ico" rel="shortcut icon">
+<style type="text/css"></style><style type="text/css">.container[data-container] {
+  position: absolute;
+  background-color: black;
+  height: 100%;
+  width: 100%; }
+  .container[data-container] .chromeless {
+    cursor: default; }
+
+[data-player]:not(.nocursor) .container[data-container]:not(.chromeless).pointer-enabled {
+  cursor: pointer; }
+.media-control-notransition {
+  transition: none !important; }
+
+.media-control[data-media-control] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none; }
+  .media-control[data-media-control].dragging {
+    pointer-events: auto;
+    cursor: -webkit-grabbing !important;
+    cursor: grabbing !important;
+    cursor: url(<%=baseUrl%>/a8c874b93b3d848f39a71260c57e3863.cur), move; }
+    .media-control[data-media-control].dragging * {
+      cursor: -webkit-grabbing !important;
+      cursor: grabbing !important;
+      cursor: url(<%=baseUrl%>/a8c874b93b3d848f39a71260c57e3863.cur), move; }
+  .media-control[data-media-control] .media-control-background[data-background] {
+    position: absolute;
+    height: 40%;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    transition: opacity 0.6s ease-out; }
+  .media-control[data-media-control] .media-control-icon {
+    line-height: 0;
+    letter-spacing: 0;
+    speak: none;
+    color: #fff;
+    opacity: 0.5;
+    vertical-align: middle;
+    text-align: left;
+    transition: all 0.1s ease; }
+  .media-control[data-media-control] .media-control-icon:hover {
+    color: white;
+    opacity: 0.75;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 0 5px; }
+  .media-control[data-media-control].media-control-hide .media-control-background[data-background] {
+    opacity: 0; }
+  .media-control[data-media-control].media-control-hide .media-control-layer[data-controls] {
+    bottom: -50px; }
+    .media-control[data-media-control].media-control-hide .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-scrubber[data-seekbar] {
+      opacity: 0; }
+  .media-control[data-media-control] .media-control-layer[data-controls] {
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    height: 32px;
+    font-size: 0;
+    vertical-align: middle;
+    pointer-events: auto;
+    transition: bottom 0.4s ease-out; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-left-panel[data-media-control] {
+      position: absolute;
+      top: 0;
+      left: 4px;
+      height: 100%; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-center-panel[data-media-control] {
+      height: 100%;
+      text-align: center;
+      line-height: 32px; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-right-panel[data-media-control] {
+      position: absolute;
+      top: 0;
+      right: 4px;
+      height: 100%; }
+    .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button {
+      background-color: transparent;
+      border: 0;
+      margin: 0 6px;
+      padding: 0;
+      cursor: pointer;
+      display: inline-block;
+      width: 32px;
+      height: 100%; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button svg {
+        width: 100%;
+        height: 22px; }
+        .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button svg path {
+          fill: white; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button:focus {
+        outline: none; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-play] {
+        float: left;
+        height: 100%; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-pause] {
+        float: left;
+        height: 100%; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-stop] {
+        float: left;
+        height: 100%; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-fullscreen] {
+        float: right;
+        background-color: transparent;
+        border: 0;
+        height: 100%; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-hd-indicator] {
+        background-color: transparent;
+        border: 0;
+        cursor: default;
+        display: none;
+        float: right;
+        height: 100%; }
+        .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-hd-indicator].enabled {
+          display: block;
+          opacity: 1.0; }
+          .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-hd-indicator].enabled:hover {
+            opacity: 1.0;
+            text-shadow: none; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-playpause] {
+        float: left; }
+      .media-control[data-media-control] .media-control-layer[data-controls] button.media-control-button[data-playstop] {
+        float: left; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-indicator[data-position], .media-control[data-media-control] .media-control-layer[data-controls] .media-control-indicator[data-duration] {
+      display: inline-block;
+      font-size: 10px;
+      color: white;
+      cursor: default;
+      line-height: 32px;
+      position: relative; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-indicator[data-position] {
+      margin: 0 6px 0 7px; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .media-control-indicator[data-duration] {
+      color: rgba(255, 255, 255, 0.5);
+      margin-right: 6px; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .media-control-indicator[data-duration]:before {
+        content: "|";
+        margin-right: 7px; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      height: 25px;
+      cursor: pointer; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] {
+        width: 100%;
+        height: 1px;
+        position: relative;
+        top: 12px;
+        background-color: #666666; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] .bar-fill-1[data-seekbar] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background-color: #c2c2c2;
+          transition: all 0.1s ease-out; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] .bar-fill-2[data-seekbar] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background-color: #005aff;
+          transition: all 0.1s ease-out; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] .bar-hover[data-seekbar] {
+          opacity: 0;
+          position: absolute;
+          top: -3px;
+          width: 5px;
+          height: 7px;
+          background-color: rgba(255, 255, 255, 0.5);
+          transition: opacity 0.1s ease; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar]:hover .bar-background[data-seekbar] .bar-hover[data-seekbar] {
+        opacity: 1; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar].seek-disabled {
+        cursor: default; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar].seek-disabled:hover .bar-background[data-seekbar] .bar-hover[data-seekbar] {
+          opacity: 0; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-scrubber[data-seekbar] {
+        position: absolute;
+        -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+        top: 2px;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+        transition: all 0.1s ease-out; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-scrubber[data-seekbar] .bar-scrubber-icon[data-seekbar] {
+          position: absolute;
+          left: 6px;
+          top: 6px;
+          width: 8px;
+          height: 8px;
+          border-radius: 10px;
+          box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+          background-color: white; }
+    .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] {
+      float: right;
+      display: inline-block;
+      height: 32px;
+      cursor: pointer;
+      margin: 0 6px;
+      box-sizing: border-box; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] {
+        float: left;
+        bottom: 0; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] .drawer-icon[data-volume] {
+          background-color: transparent;
+          border: 0;
+          box-sizing: content-box;
+          width: 32px;
+          height: 32px;
+          opacity: 0.5; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] .drawer-icon[data-volume]:hover {
+            opacity: 0.75; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] .drawer-icon[data-volume] svg {
+            height: 24px;
+            position: relative;
+            top: 3px; }
+            .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] .drawer-icon[data-volume] svg path {
+              fill: white; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .drawer-icon-container[data-volume] .drawer-icon[data-volume].muted svg {
+            margin-left: 2px; }
+      .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] {
+        float: left;
+        position: relative;
+        overflow: hidden;
+        top: 6px;
+        width: 42px;
+        height: 18px;
+        padding: 3px 0;
+        transition: width .2s ease-out; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-background[data-volume] {
+          height: 1px;
+          position: relative;
+          top: 7px;
+          margin: 0 3px;
+          background-color: #666666; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-background[data-volume] .bar-fill-1[data-volume] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #c2c2c2;
+            transition: all 0.1s ease-out; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-background[data-volume] .bar-fill-2[data-volume] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #005aff;
+            transition: all 0.1s ease-out; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-background[data-volume] .bar-hover[data-volume] {
+            opacity: 0;
+            position: absolute;
+            top: -3px;
+            width: 5px;
+            height: 7px;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition: opacity 0.1s ease; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-scrubber[data-volume] {
+          position: absolute;
+          -webkit-transform: translateX(-50%);
+                  transform: translateX(-50%);
+          top: 0px;
+          left: 0;
+          width: 20px;
+          height: 20px;
+          opacity: 1;
+          transition: all 0.1s ease-out; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .bar-scrubber[data-volume] .bar-scrubber-icon[data-volume] {
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+            background-color: white; }
+        .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .segmented-bar-element[data-volume] {
+          float: left;
+          width: 4px;
+          padding-left: 2px;
+          height: 12px;
+          opacity: 0.5;
+          box-shadow: inset 2px 0 0 white;
+          transition: -webkit-transform .2s ease-out;
+          transition: transform .2s ease-out;
+          transition: transform .2s ease-out, -webkit-transform .2s ease-out; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .segmented-bar-element[data-volume].fill {
+            box-shadow: inset 2px 0 0 #fff;
+            opacity: 1; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .segmented-bar-element[data-volume]:nth-of-type(1) {
+            padding-left: 0; }
+          .media-control[data-media-control] .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume] .segmented-bar-element[data-volume]:hover {
+            -webkit-transform: scaleY(1.5);
+                    transform: scaleY(1.5); }
+  .media-control[data-media-control].w320 .media-control-layer[data-controls] .drawer-container[data-volume] .bar-container[data-volume].volume-bar-hide {
+    width: 0;
+    height: 12px;
+    top: 9px;
+    padding: 0; }
+[data-player] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  overflow: hidden;
+  font-size: 100%;
+  font-family: "Roboto", "Open Sans", Arial, sans-serif;
+  text-shadow: 0 0 0;
+  box-sizing: border-box; }
+  [data-player] div, [data-player] span, [data-player] applet, [data-player] object, [data-player] iframe,
+  [data-player] h1, [data-player] h2, [data-player] h3, [data-player] h4, [data-player] h5, [data-player] h6, [data-player] p, [data-player] blockquote, [data-player] pre,
+  [data-player] a, [data-player] abbr, [data-player] acronym, [data-player] address, [data-player] big, [data-player] cite, [data-player] code,
+  [data-player] del, [data-player] dfn, [data-player] em, [data-player] img, [data-player] ins, [data-player] kbd, [data-player] q, [data-player] s, [data-player] samp,
+  [data-player] small, [data-player] strike, [data-player] strong, [data-player] sub, [data-player] sup, [data-player] tt, [data-player] var,
+  [data-player] b, [data-player] u, [data-player] i, [data-player] center,
+  [data-player] dl, [data-player] dt, [data-player] dd, [data-player] ol, [data-player] ul, [data-player] li,
+  [data-player] fieldset, [data-player] form, [data-player] label, [data-player] legend,
+  [data-player] table, [data-player] caption, [data-player] tbody, [data-player] tfoot, [data-player] thead, [data-player] tr, [data-player] th, [data-player] td,
+  [data-player] article, [data-player] aside, [data-player] canvas, [data-player] details, [data-player] embed,
+  [data-player] figure, [data-player] figcaption, [data-player] footer, [data-player] header, [data-player] hgroup,
+  [data-player] menu, [data-player] nav, [data-player] output, [data-player] ruby, [data-player] section, [data-player] summary,
+  [data-player] time, [data-player] mark, [data-player] audio, [data-player] video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline; }
+  [data-player] table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  [data-player] caption, [data-player] th, [data-player] td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle; }
+  [data-player] q, [data-player] blockquote {
+    quotes: none; }
+    [data-player] q:before, [data-player] q:after, [data-player] blockquote:before, [data-player] blockquote:after {
+      content: "";
+      content: none; }
+  [data-player] a img {
+    border: none; }
+  [data-player]:focus {
+    outline: 0; }
+  [data-player] * {
+    max-width: none;
+    box-sizing: inherit;
+    float: none; }
+  [data-player] div {
+    display: block; }
+  [data-player].fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0;
+    left: 0; }
+  [data-player].nocursor {
+    cursor: none; }
+
+.clappr-style {
+  display: none !important; }
+[data-html5-video] {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: block; }
+.clappr-flash-playback[data-flash-playback] {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none; }
+[data-html-img] {
+  max-width: 100%;
+  max-height: 100%; }
+[data-no-op] {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center; }
+
+[data-no-op] p[data-no-op-msg] {
+  position: absolute;
+  text-align: center;
+  font-size: 25px;
+  left: 0;
+  right: 0;
+  color: white;
+  padding: 10px;
+  /* center vertically */
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  max-height: 100%;
+  overflow: auto; }
+
+[data-no-op] canvas[data-no-op-canvas] {
+  background-color: #777;
+  height: 100%;
+  width: 100%; }
+.spinner-three-bounce[data-spinner] {
+  position: absolute;
+  margin: 0 auto;
+  width: 70px;
+  text-align: center;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  /* center vertically */
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); }
+  .spinner-three-bounce[data-spinner] > div {
+    width: 18px;
+    height: 18px;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+            animation: bouncedelay 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both; }
+  .spinner-three-bounce[data-spinner] [data-bounce1] {
+    -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s; }
+  .spinner-three-bounce[data-spinner] [data-bounce2] {
+    -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s; }
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+[data-watermark] {
+  position: absolute;
+  min-width: 70px;
+  max-width: 200px;
+  width: 12%;
+  text-align: center;
+  z-index: 10; }
+
+[data-watermark] a {
+  outline: none;
+  cursor: pointer; }
+
+[data-watermark] img {
+  max-width: 100%; }
+
+[data-watermark-bottom-left] {
+  bottom: 10px;
+  left: 10px; }
+
+[data-watermark-bottom-right] {
+  bottom: 10px;
+  right: 42px; }
+
+[data-watermark-top-left] {
+  top: 10px;
+  left: 10px; }
+
+[data-watermark-top-right] {
+  top: 10px;
+  right: 37px; }
+.player-poster[data-poster] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 998;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+  .player-poster[data-poster].clickable {
+    cursor: pointer; }
+  .player-poster[data-poster]:hover .play-wrapper[data-poster] {
+    opacity: 1; }
+  .player-poster[data-poster] .play-wrapper[data-poster] {
+    width: 100%;
+    height: 25%;
+    margin: 0 auto;
+    opacity: 0.75;
+    transition: opacity 0.1s ease; }
+    .player-poster[data-poster] .play-wrapper[data-poster] svg {
+      height: 100%; }
+      .player-poster[data-poster] .play-wrapper[data-poster] svg path {
+        fill: #fff; }
+.dvr-controls[data-dvr-controls] {
+  display: inline-block;
+  float: left;
+  color: #fff;
+  line-height: 32px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 6px; }
+  .dvr-controls[data-dvr-controls] .live-info {
+    cursor: default;
+    font-family: "Roboto", "Open Sans", Arial, sans-serif;
+    text-transform: uppercase; }
+    .dvr-controls[data-dvr-controls] .live-info:before {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 7px;
+      height: 7px;
+      border-radius: 3.5px;
+      margin-right: 3.5px;
+      background-color: #ff0101; }
+    .dvr-controls[data-dvr-controls] .live-info.disabled {
+      opacity: 0.3; }
+      .dvr-controls[data-dvr-controls] .live-info.disabled:before {
+        background-color: #fff; }
+  .dvr-controls[data-dvr-controls] .live-button {
+    cursor: pointer;
+    outline: none;
+    display: none;
+    border: 0;
+    color: #fff;
+    background-color: transparent;
+    height: 32px;
+    padding: 0;
+    opacity: 0.7;
+    font-family: "Roboto", "Open Sans", Arial, sans-serif;
+    text-transform: uppercase;
+    transition: all 0.1s ease; }
+    .dvr-controls[data-dvr-controls] .live-button:before {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 7px;
+      height: 7px;
+      border-radius: 3.5px;
+      margin-right: 3.5px;
+      background-color: #fff; }
+    .dvr-controls[data-dvr-controls] .live-button:hover {
+      opacity: 1;
+      text-shadow: rgba(255, 255, 255, 0.75) 0 0 5px; }
+
+.dvr .dvr-controls[data-dvr-controls] .live-info {
+  display: none; }
+
+.dvr .dvr-controls[data-dvr-controls] .live-button {
+  display: block; }
+
+.dvr.media-control.live[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] .bar-fill-2[data-seekbar] {
+  background-color: #005aff; }
+
+.media-control.live[data-media-control] .media-control-layer[data-controls] .bar-container[data-seekbar] .bar-background[data-seekbar] .bar-fill-2[data-seekbar] {
+  background-color: #ff0101; }
+.cc-controls[data-cc-controls] {
+  float: right;
+  position: relative;
+  display: none; }
+  .cc-controls[data-cc-controls].available {
+    display: block; }
+  .cc-controls[data-cc-controls] .cc-button {
+    padding: 6px !important; }
+    .cc-controls[data-cc-controls] .cc-button.enabled {
+      display: block;
+      opacity: 1.0; }
+      .cc-controls[data-cc-controls] .cc-button.enabled:hover {
+        opacity: 1.0;
+        text-shadow: none; }
+  .cc-controls[data-cc-controls] > ul {
+    list-style-type: none;
+    position: absolute;
+    bottom: 25px;
+    border: 1px solid black;
+    display: none;
+    background-color: #e6e6e6; }
+  .cc-controls[data-cc-controls] li {
+    font-size: 10px; }
+    .cc-controls[data-cc-controls] li[data-title] {
+      background-color: #c3c2c2;
+      padding: 5px; }
+    .cc-controls[data-cc-controls] li a {
+      color: #444;
+      padding: 2px 10px;
+      display: block;
+      text-decoration: none; }
+      .cc-controls[data-cc-controls] li a:hover {
+        background-color: #555;
+        color: white; }
+        .cc-controls[data-cc-controls] li a:hover a {
+          color: white;
+          text-decoration: none; }
+    .cc-controls[data-cc-controls] li.current a {
+      color: #f00; }
+.seek-time[data-seek-time] {
+  position: absolute;
+  white-space: nowrap;
+  height: 20px;
+  line-height: 20px;
+  font-size: 0;
+  left: -100%;
+  bottom: 55px;
+  background-color: rgba(2, 2, 2, 0.5);
+  z-index: 9999;
+  transition: opacity 0.1s ease; }
+  .seek-time[data-seek-time].hidden[data-seek-time] {
+    opacity: 0; }
+  .seek-time[data-seek-time] [data-seek-time] {
+    display: inline-block;
+    color: white;
+    font-size: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    vertical-align: top; }
+  .seek-time[data-seek-time] [data-duration] {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+    padding-right: 7px;
+    vertical-align: top; }
+    .seek-time[data-seek-time] [data-duration]:before {
+      content: "|";
+      margin-right: 7px; }
+div.player-error-screen {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #CCCACA;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  div.player-error-screen__content[data-error-screen] {
+    font-size: 14px;
+    color: #CCCACA;
+    margin-top: 45px; }
+  div.player-error-screen__title[data-error-screen] {
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 18px; }
+  div.player-error-screen__message[data-error-screen] {
+    width: 90%;
+    margin: 0 auto; }
+  div.player-error-screen__code[data-error-screen] {
+    font-size: 13px;
+    margin-top: 15px; }
+  div.player-error-screen__reload {
+    cursor: pointer;
+    width: 30px;
+    margin: 15px auto 0; }
+</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><style></style></head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo  pace-done"><div class="cc-revoke cc-bottom cc-right cc-animate cc-color-override--1825134283" style="display: none;">Cookie Policy</div><div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-floating cc-type-opt-in cc-theme-block cc-bottom cc-right cc-color-override--1825134283 cc-invisible" style="display: none;"><!--googleoff: all--><span id="cookieconsent:desc" class="cc-message">This website uses cookies to ensure you get the best experience on our website. <a aria-label="learn more about cookies" role="button" tabindex="0" class="cc-link" href="http://cookiesandyou.com/" rel="noopener noreferrer nofollow" target="_blank">Learn more</a></span><div class="cc-compliance cc-highlight"><a aria-label="dismiss cookie message" role="button" tabindex="0" class="cc-btn cc-dismiss">Dismiss</a><a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Allow</a></div><!--googleon: all--></div><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+<!-- BEGIN QUICK NAV -->
+<nav class="quick-nav">
+	<a class="quick-nav-trigger" href="http://localhost:8080/rwe-web/?page=studyAdministration%2Flocations.page%3FstudyIdOrUuid%3D22&amp;nav=studyAdministration%2Flocations.page#0">
+		<span aria-hidden="true"></span>
+	</a>
+	<ul>
+		<li>
+			<a id="quick-nav-help" class="active">
+				<span>Help</span>
+				<i class="far fa-life-ring"></i>
+			</a>
+		</li>
+		
+			<li>
+				<a href="mailto:discover_cvrm_registry_support@genomseqcare.com?subject=Feedback&amp;body=Please%20follow%20these%20instructions%20to%20let%20us%20know%20the%20problems%20you%20were%20encountered:%0D1.Press%20ALT+PRNSCRN%20to%20send%20a%20screenshot%20of%20the%20active%20window%20to%20your%20clipboard%0D2.Press%20CTRL+V%20to%20paste%20the%20image%20in%20this%20email%0D3.Describe%20the%20problems%20you%20were%20having%20with%20the%20system%0D%0DPlease%20DONOT%20modify%20the%20follwing%20information,%0DUser%20Name:%20admin%0DUser%20Id:%201%20%0DEmail%20Address:%20104653859@qq.com" id="quick-nav-contact">
+					<span>Contact</span>
+					<i class="far fa-envelope"></i>
+				</a>
+			</li>
+		
+	</ul>
+	<span aria-hidden="true" class="quick-nav-bg"></span>
+</nav>
+<div class="quick-nav-overlay"></div>
+<!-- END QUICK NAV -->
+<!-- BEGIN REBUILD VISIT ATTRIBUTE -->
+<div class="modal fade" id="rebuild-visit-attribute-progress" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title font-grey-gallery uppercase">
+					rebuild visit attribute
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="progress progress-striped active">
+					<div id="visit-attribute-progress" class="progress-bar label-success" role="progressbar" style="display: none; width: 0%"></div>
+				</div>
+				<div class="bootbox-body">
+					We are rebuilding visit attribute, please wait...
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END REBUILD VISIT ATTRIBUTE -->
+
+<!-- BEGIN SESSION TIMEOUT REMINDER -->
+<div class="modal fade in" id="idle-timeout-dialog" data-backdrop="static" tabindex="-1" aria-hidden="false" style="display: none;">
+	<div class="modal-dialog modal-small">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title font-grey-gallery uppercase">Your session is about to expire.</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					<i class="fas fa-exclamation font-red"></i> You session will be locked in
+					<span id="idle-timeout-counter">16</span> seconds.</p>
+				<p>Do you want to continue your session?</p>
+			</div>
+			<div class="modal-footer">
+				<button id="idle-timeout-dialog-logout" type="button" class="btn dark btn-outline sbold uppercase">
+					No, Logout</button>
+				<button id="idle-timeout-dialog-keepalive" type="button" class="btn green btn-outline sbold uppercase" data-dismiss="modal">Yes, Keep Working</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END SESSION TIMEOUT REMINDER -->
+<div class="loader" style="display: none;"></div>
+<input type="hidden" id="hdnForcePassword" value="false">
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner clearfix">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="javascript:;">
+				<img src="./rwebox.com_files/logo.png" alt="logo" class="logo-default">
+			</a>
+			<a class="btn btn-outline btn-xs btn-circle red logo-demo-icon show" href="javascript:;">
+				DEV
+			</a>
+			<div class="menu-toggler sidebar-toggler">
+				<span></span>
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN PAGE ACTIONS -->
+		<div class="page-actions">
+			<div class="btn-group">
+				<button type="button" class="btn green-sharp btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+					<span class="hidden-sm hidden-xs" id="current-study">DISCOVER CaReMe Global Registry&nbsp;</span>
+					<input type="hidden" id="current-study-id" value="22">
+					<i class="fas fa-angle-down"></i>
+				</button>
+				
+					<ul class="dropdown-menu" role="menu">
+						
+							
+								
+								
+									
+										<li role="presentation" class="dropdown-header">
+											<i class="medical-icon-i-cardiology"></i>
+											CVRM
+										</li>
+										<li class="divider"></li>
+									
+									
+									
+									
+									
+								
+							
+							<li>
+								<a onclick="switchStudy(&#39;22&#39;)">DISCOVER CaReMe Global Registry</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;34&#39;)">DISCOVER CKD</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;45&#39;)">P2aTienT-2DM Study</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;37&#39;)">Preferencia de Pacientes para el Tratamiento de DT2</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;10&#39;)">RWE Dapagliflozin Costa Rica</a>
+							</li>
+						
+							
+								
+								
+									
+									
+										<li role="presentation" class="dropdown-header">
+											<i class="medical-icon-i-respiratory"></i>
+											Respiratory
+										</li>
+										<li class="divider"></li>
+									
+									
+									
+									
+								
+							
+							<li>
+								<a onclick="switchStudy(&#39;6&#39;)">China Severe Asthma Registry</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;8&#39;)">CMUCH</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;19&#39;)">LASSYC - BRA</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;7&#39;)">LASSYC Study</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;35&#39;)">Patient Survey @Pharmacy</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;33&#39;)">PREPARE</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;29&#39;)">PUMA - EGY</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;26&#39;)">PUMA - UAE</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;32&#39;)">SABINA</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;16&#39;)">SPACE</a>
+							</li>
+						
+							
+								
+								
+									
+									
+									
+										<li role="presentation" class="dropdown-header">
+											<i class="medical-icon-i-oncology"></i>
+											Oncology
+										</li>
+										<li class="divider"></li>
+									
+									
+									
+								
+							
+							<li>
+								<a onclick="switchStudy(&#39;39&#39;)">Early EGFR</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;12&#39;)">FLABRA</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;30&#39;)">KINDLE</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;9&#39;)">Lung Cancer Followup</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;14&#39;)">PANORAMA - REASSERT</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;31&#39;)">PANORAMA - RETRO</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;43&#39;)">REMPRO Registry</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;11&#39;)">国家级重大慢病课题</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;13&#39;)">内蒙古NSCLC分子病理研究</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;44&#39;)">评估金妥昔单抗注射液联合甲磺酸阿美替尼治疗表皮生长因子受体基因突变的IV期非小细胞肺癌患者的研究</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;18&#39;)">晚期肺癌ctDNA动态监测</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;21&#39;)">真实世界健脾解毒法联合化疗治疗IV期结直肠癌湿热蕴脾证疗效和安全性评价——回顾性队列研究</a>
+							</li>
+						
+							
+							<li>
+								<a onclick="switchStudy(&#39;15&#39;)">中国多中心肺癌病人精准医疗数据库</a>
+							</li>
+						
+					</ul>
+				
+			</div>
+		</div>
+		<!-- END PAGE ACTIONS -->
+		<!-- BEGIN PAGE TOP -->
+		<div class="page-top">
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<li class="dropdown">
+						
+							
+							
+								<a href="javascript:;" class="dropdown-toggle a-language" data-toggle="dropdown" data-close-others="true">
+									<img alt="" src="./rwebox.com_files/gb.png">
+									<i class="fas fa-sort-down font-blue-oleo"></i>
+								</a>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+						
+						<ul class="dropdown-menu dropdown-menu-default">
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=en_US" class="switch-lang">
+										<img alt="English" src="./rwebox.com_files/us.png">
+										English (United States)
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=zh_CN" class="switch-lang">
+										<img alt="Chinese" src="./rwebox.com_files/cn.png">
+										中文
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=es_ES" class="switch-lang">
+										<img alt="Spanish" src="./rwebox.com_files/es.png">
+										Español
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=ru_RU" class="switch-lang">
+										<img alt="Russian" src="./rwebox.com_files/ru.png">
+										Русский
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=ka_GE" class="switch-lang">
+										<img alt="Georgia" src="./rwebox.com_files/ge.png">
+										ქართული
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=pt_BR" class="switch-lang">
+										<img alt="Brazil" src="./rwebox.com_files/br.png">
+										Português (Brasil)
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=pt_PT" class="switch-lang">
+										<img alt="Portuguese" src="./rwebox.com_files/pt.png">
+										Português (Português)
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=ko_KR" class="switch-lang">
+										<img alt="Korean" src="./rwebox.com_files/kr.png">
+										한국어
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=it_IT" class="switch-lang">
+										<img alt="Italy" src="./rwebox.com_files/it.png">
+										Italiano
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=ja_JP" class="switch-lang">
+										<img alt="Japan" src="./rwebox.com_files/jp.png">
+										日本語
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=sv_SE" class="switch-lang">
+										<img alt="Sweden" src="./rwebox.com_files/se.png">
+										Svenska
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=in_ID" class="switch-lang">
+										<img alt="Indonesia" src="./rwebox.com_files/id.png">
+										Orang indonesia
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=vi_VN" class="switch-lang">
+										<img alt="Vietnam" src="./rwebox.com_files/vi.png">
+										Tiếng việt nam
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=ar_LB" class="switch-lang">
+										<img alt="Arabic" src="./rwebox.com_files/lb.png">
+										العربية
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="http://localhost:8080/rwe-web/switchLanguage?lang=fa_IR" class="switch-lang">
+										<img alt="Persian" src="./rwebox.com_files/ir.png">
+										فارسی
+									</a>
+								</li>
+							
+						</ul>
+					</li>
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+							<span class="username username-hide-on-mobile font-green-sharp">admin</span>
+							<i class="far fa-bell font-red-haze shake-rotate shake-constant shake-constant--hover " aria-hidden="true"></i>
+							<i class="fas fa-sort-down font-blue-oleo"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-default">
+							<li>
+								<a class="ajaxify" href="http://localhost:8080/rwe-web/inbox/inbox.page" data-nav="study/dashboard.page" title="Inbox">
+									<i class="fas fa-inbox" aria-hidden="true"></i>
+									Inbox
+									
+										<span class="badge badge-danger">511</span>
+									
+								</a>
+							</li>
+							<li>
+								<a class="ajaxify" href="http://localhost:8080/rwe-web/user/profileSettings.page" data-nav="study/dashboard.page" title="Settings">
+									<i class="fas fa-cog" aria-hidden="true"></i>
+									Settings
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="http://localhost:8080/rwe-web/logout.page">
+									<i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+									Log Out
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+			</div>
+			<!-- END TOP NAVIGATION MENU -->
+		</div>
+		<!-- END TOPPAGE TOP -->
+	</div>
+	<!-- END HEADER INNER -->
+	
+		
+			<div class="trapezoid" id="page-rwebox-switch-environment">
+				<span class="uppercase">Demo mode</span>
+				<button type="button" class="btn btn-circle btn-xs btn-toggle active" onclick="changeMainEnvironment(this)" data-toggle="button" disabled="" aria-pressed="false" autocomplete="off">
+					<div class="btn-circle handle"></div>
+				</button>
+			</div>
+		
+		
+	
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<div class="page-sidebar navbar-collapse collapse" id="page-sidebar">
+			<!-- BEGIN SIDEBAR MENU -->
+			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+				<li class="sidebar-toggler-wrapper">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler"></div>
+					<!-- END SIDEBAR TOGGLER BUTTON -->
+				</li>
+				
+					<li class="sidebar-search-wrapper">
+						<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+						<div class="sidebar-search">
+							<a href="javascript:;" class="remove">
+								<i class="far fa-window-close"></i>
+							</a>
+							<div class="input-group">
+								<input type="text" class="form-control" autocomplete="new-password" placeholder="Search...">
+								<span class="input-group-btn">
+								<a href="javascript:;" class="btn submit" data-nav="patient/search.page" title="Patient">
+									<i class="fas fa-search"></i>
+								</a>
+							</span>
+							</div>
+						</div>
+						<!-- END RESPONSIVE QUICK SEARCH FORM -->
+					</li>
+				
+				<li class="heading">
+					<h3 class="uppercase">Navigation</h3>
+				</li>
+				
+				
+					<li class="active start">
+						<a class="ajaxify" href="http://localhost:8080/rwe-web/study/dashboard.page" data-nav="study/dashboard.page" title="Dashboard">
+							<i class="fas fa-tachometer-alt"></i>
+							<span class="title">
+							Dashboard
+						</span>
+							<span class="selected"></span>
+						</a>
+					</li>
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="far fa-user"></i>
+							<span class="title">Patient</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a class="ajaxify" href="http://localhost:8080/rwe-web/patient/search.page" data-nav="patient/search.page" title="Patient">
+									<span class="title">Patient</span>
+									<span class="selected"></span>
+								</a>
+							</li>
+							<li>
+								<a class="ajaxify" href="http://localhost:8080/rwe-web/patient/search.page?viewType=matrix" data-nav="patient/search.page?viewType=matrix" title="Matrix">
+								<span class="title">Matrix</span>
+									<span class="selected"></span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				
+				
+					<li>
+						<a class="ajaxify" href="http://localhost:8080/rwe-web/taskcenter/home.page?taskType=requireSignature" data-nav="taskcenter/home.page?taskType=requireSignature" title="Tasks">
+							<i class="far fa-tasks-alt"></i>
+							<span class="title">
+						Tasks
+					</span>
+							<span class="selected"></span>
+						</a>
+					</li>
+				
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="fas fa-search"></i>
+							<span class="title">Search</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/search/simple.page" data-nav="search/simple.page" title="Search">
+										Search
+									</a>
+								</li>
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/search/advanced.page" data-nav="search/advanced.page" title="Advanced Search">
+										Advanced Search
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/homepage/builderList.page" data-nav="homepage/builderList.page" title="Cohort List">
+										Cohort List
+									</a>
+								</li>
+							
+						</ul>
+					</li>
+				
+				
+					
+						<li>
+							<a target="_blank" href="http://localhost/rwe-bi/bi/dashBoard/22?lang=en" title="Analytics">
+								<i class="fas fa-chart-area"></i>
+								<span class="title">
+									Analytics
+								</span>
+							</a>
+						</li>
+					
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="fas fa-upload"></i>
+							<span class="title">Import</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/dataImport/download.page" data-nav="dataImport/download.page" title="Download Template">
+										Download Template
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/dataImport/fileUpload.page" data-nav="dataImport/fileUpload.page" title="Form Import">
+										Form Import
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/importFieldHistory/toListView.page" data-nav="importFieldHistory/toListView.page" title="Form Imported Field">
+										Form Imported Field
+									</a>
+								</li>
+							
+						</ul>
+					</li>
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="far fa-user-check"></i>
+							<span class="title">Data QC</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/queries/list.page" data-nav="queries/list.page" title="Query">
+										Query
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/audit/audit.page" data-nav="audit/audit.page" title="Study Audit Trail">
+										Study Audit Trail
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/enversAudit/toListView.page" data-nav="enversAudit/toListView.page" title="Study Audit Trail (new)">
+										Study Audit Trail (new)
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/patient/pdf/report/path.page" data-nav="patient/pdf/report/path.page" title="Casebook Report" text="Casebook Report">
+									Casebook Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/data/cleaning/report/path.page" data-nav="data/cleaning/report/path.page" title="Data Cleaning Progress Report" text="Data Cleaning Progress Report">
+									Data Cleaning Progress Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyFormStatusReport/view.page" data-nav="studyFormStatusReport/view.page" title="Study Form Status Report" text="Study Form Status Progress Export">
+									Study Form Status Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/userAccountReport/view.page" data-nav="userAccountReport/view.page" title="User Account Report" text="User Account Export">
+									User Account Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/userAuditLogReport/view.page" data-nav="userAuditLogReport/view.page" title="User Activity Report" text="User Activity Export">
+									User Activity Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/queryDetailReport/view.page" data-nav="queryDetailReport/view.page" title="Query Report" text="Query Detail Export">
+									Query Report
+									</a>
+								</li>
+							
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/patientHardcopyReport/view.page" data-nav="patientHardcopyReport/view.page" title="Patient Hardcopy Report" text="Patient Hardcopy Report">
+									Patient Hardcopy Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/countryBasedCriticalDataPointsReport/view.page" data-nav="countryBasedCriticalDataPointsReport/view.page" title="Country Based Critical Data Points Report" text="Country Based Critical Data Points Report">
+									Country Based Critical Data Points Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/criticalDataPointsCompletionReport/view.page" data-nav="criticalDataPointsCompletionReport/view.page" title="Critical/mandatory Data Points Report" text="Critical Data Points Completion Report">
+									Critical/mandatory Data Points Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/visitBasedCriticalDataPointsCompletion/view.page" data-nav="visitBasedCriticalDataPointsCompletion/view.page" title="Visit Based Critical Data Points Report" text="Discover CaReMe Export">
+									Visit Based Critical Data Points Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/databaseSpecificationsReport/view.page" data-nav="databaseSpecificationsReport/view.page" title="Database Specifications Report" text="Database Specifications Report">
+									Database Specifications Report
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/fileDownload/toListView.page" data-nav="fileDownload/toListView.page" title="Download Center">
+										Download Center
+									</a>
+								</li>
+							
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+						</ul>
+					</li>
+				
+				
+					<li>
+						<a class="ajaxify" href="http://localhost:8080/rwe-web/study/oss/list/documents" data-nav="study/oss/list/documents" title="Document">
+							<i class="far fa-file-alt"></i>
+							<span class="title">
+						Document
+					</span>
+						</a>
+					</li>
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="fas fa-user-md"></i>
+							<span class="title">Study Administration</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/locations.page" data-nav="studyAdministration/locations.page" title="Locations">
+										Locations
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/users.page" data-nav="studyAdministration/users.page" title="Manage Users">
+										Manage Users
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/criticalData/toListView.page" data-nav="studyAdministration/criticalData/toListView.page" title="Critical Data">
+										Critical Data
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/add/exiting/user/.page?studyId=22&amp;dataNav=" data-nav="studyAdministration/add/exiting/user/.page?studyId=22&amp;dataNav=" title="Add Existing User">
+										Add Existing User
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdmin/basic/information/edit.page" data-nav="studyAdmin/basic/information/edit.page" title="Manage Study">
+										Manage Study
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="javascript:;">
+										Concepts
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/concept.page" data-nav="studyAdministration/concept.page" title="Concept">
+												Concept
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/concept/search.page" data-nav="studyAdministration/concept/search.page" title="Find Concept">
+												Find Concept
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/form/list.page" data-nav="studyAdministration/form/list.page" title="Manage Forms">
+										Manage Forms
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/forms/availability/list.page" data-nav="studyAdministration/forms/availability/list.page" title="Forms Availability">
+										Forms Availability
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/event/list.page" data-nav="studyAdministration/event/list.page" title="Study Event">
+										Study Event
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyAdministration/event/list/availability.page" data-nav="studyAdministration/event/list/availability.page" title="Study Events Availability">
+										Study Events Availability
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="javascript:;">
+										Checks
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/rule/set.page" data-nav="rule/set.page" title="Check Type">
+												Edit Check Type
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/checks/list.page" data-nav="checks/list.page" title="Edit Checks">
+												Edit Checks
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/study/description.page" data-nav="study/description.page" title="Manage Study Description">
+										Manage Study Description
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/study/manage/foodDataSource.page" data-nav="study/manage/foodDataSource.page" title="Manage Food Data Source">
+										Manage Food Data Source
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="javascript:;">
+										Manage ePRO
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										
+											<li>
+												<a class="ajaxify" href="http://localhost:8080/rwe-web/userDestinnation/list.page" data-nav="userDestinnation/list.page" title="Manage Configurations">
+													User Task
+												</a>
+											</li>
+										
+										
+											<li>
+												<a class="ajaxify" href="http://localhost:8080/rwe-web/study/instance/locale.page" data-nav="study/instance/locale.page" title="Manage Study Locale">
+													Manage Locale
+												</a>
+											</li>
+										
+										
+											<li>
+												<a class="ajaxify" href="http://localhost:8080/rwe-web/study/manage/privacyPolicy.page" data-nav="study/manage/privacyPolicy.page" title="Manage Study Privacy Policy">
+													Manage Terms of Service And Privacy Policy
+												</a>
+											</li>
+										
+										
+											<li>
+												<a class="ajaxify" href="http://localhost:8080/rwe-web/study/manage/app/version.page" data-nav="study/manage/app/version.page" title="Manage App Version">
+													Manage App Version
+												</a>
+											</li>
+										
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a href="javascript:;">
+										Manage Hard Copies
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/study/administration/hardCopyTag/list.page" data-nav="study/administration/hardCopyTag/list.page" title="Manage Tags">
+												Manage Tags
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/study/administration/hardCopyTag/add/existing.page" data-nav="study/administration/hardCopyTag/add/existing.page" title="Add Existing Hardcopy Tags">
+												Add Existing Hardcopy Tags
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyadministration/patientidentifiertype/list.page" data-nav="studyadministration/patientidentifiertype/list.page" title="Manage Identifier Types">
+										Manage Identifier Types
+									</a>
+								</li>
+							
+						</ul>
+					</li>
+				
+				
+					<li>
+						<a href="javascript:;">
+							<i class="fas fa-cogs"></i>
+							<span class="title">Administration</span>
+							<span class="arrow"></span>
+							<span class="selected"></span>
+						</a>
+						<ul class="sub-menu">
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studies/list.page" data-nav="studies/list.page" title="Manage Studies">
+										Manage Studies
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/milestone/list.page" data-nav="milestone/list.page" title="Manage Milestone">
+										Manage Milestone
+									</a>
+								</li>
+							
+							<li>
+								<a href="javascript:;">
+									Manage Users
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub-menu">
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/user/list.page" data-nav="user/list.page" title="Manage Users">
+												Manage Users
+											</a>
+										</li>
+									
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/role/list.page" data-nav="role/list.page" title="Manage Roles">
+												Manage Roles
+											</a>
+										</li>
+									
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/privilege/list.page" data-nav="privilege/list.page" title="Manage Permissions">
+												Manage Permissions
+											</a>
+										</li>
+									
+								</ul>
+							</li>
+							
+								<li>
+									<a href="javascript:;">
+										Concepts
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/concept/list.page" data-nav="concept/list.page" title="Concept">
+												Concept
+											</a>
+										</li>
+
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/concept/search.page" data-nav="concept/search.page" title="Find Concept">
+												Find Concept
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/form/list.page" data-nav="form/list.page" title="Manage Forms">
+										Manage Forms
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/visitType/list.page" data-nav="visitType/list.page" title="Visit Type">
+										Visit Type
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/studyDashboardWidget/list.page" data-nav="studyDashboardWidget/list.page" title="Study Dashboard Widget">
+										Study Dashboard Widget
+									</a>
+								</li>
+							
+							
+								<li>
+									<a href="javascript:;">
+										Manage Hard Copies
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/hardCopyTag/list.page" data-nav="hardCopyTag/list.page" title="Manage Tags">
+												Manage Tags
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/patientidentifiertype/list.page" data-nav="patientidentifiertype/list.page" title="Manage Identifier Types">
+										Manage Identifier Types
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/patient/attribute.page" data-nav="patient/attribute.page" title="Patient Attribute">
+										Patient Attribute
+									</a>
+								</li>
+							
+							
+								<li>
+									<a class="ajaxify" href="http://localhost:8080/rwe-web/provider/list.page" data-nav="provider/list.page" title="Manage Providers">
+										Manage Providers
+									</a>
+								</li>
+							
+							<li>
+								<a href="javascript:;">
+									Appointment Management
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub-menu">
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/appointmentscheduling/appointmentTypeList.page" data-nav="appointmentscheduling/appointmentTypeList.page" title="Appointment Type Management">
+												Appointment Type Management
+											</a>
+										</li>
+									
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/appointmentscheduling/appointmentSettingsForm.form" data-nav="appointmentscheduling/appointmentSettingsForm.form" title="Settings">
+												Settings
+											</a>
+										</li>
+									
+								</ul>
+							</li>
+							<li>
+								<a class="ajaxify" href="http://localhost:8080/rwe-web/cohort/query.page" data-nav="cohort/query.page" title="Cohort Query">
+									Cohort Query
+								</a>
+							</li>
+							
+								<li>
+									<a href="javascript:;">
+										Manage Synchronization
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/config.page" data-nav="sync/config.page" title="Configuration">
+												Configuration
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/history.page" data-nav="sync/history.page" title="History of Changes">
+												History of Changes
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/help.page" data-nav="sync/help.page" title="Help/FAQ">
+												Help/FAQ
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/overview.page" data-nav="sync/overview.page" title="Overview">
+												Overview
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/config/status.page?mode=SEND_WEB" data-nav="sync/config/status.page?mode=SEND_WEB" title="Synchronization Status">
+												Synchronization Status
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/setting/settings.page" data-nav="sync/setting/settings.page" title="Settings">
+												Settings
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/statistics/statistics.page" data-nav="sync/statistics/statistics.page" title="Statistics">
+												Statistics
+											</a>
+										</li>
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/sync/maintenance/maintenance.page" data-nav="sync/maintenance/maintenance.page" title="Maintenance">
+												Maintenance
+											</a>
+										</li>
+									</ul>
+								</li>
+							
+							<li>
+								<a href="javascript:;">
+									Maintenance
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub-menu">
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/administration/maintenance/searchIndex.page" data-nav="administration/maintenance/searchIndex.page" title="Manage Search Index">
+												Manage Search Index
+											</a>
+										</li>
+									
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/administration/maintenance/currentUsers.page" data-nav="administration/maintenance/currentUsers.page" title="View Logged In Users">
+												View Logged In Users
+											</a>
+										</li>
+									
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/administration/maintenance/serverLog.page" data-nav="administration/maintenance/serverLog.page" title="View Server Log">
+												View Server Log
+											</a>
+										</li>
+									
+									<li>
+										<a class="ajaxify" href="http://localhost:8080/rwe-web/administration/maintenance/systemInfo.page" data-nav="administration/maintenance/systemInfo.page" title="System Information">
+											System Information
+										</a>
+									</li>
+									
+										<li>
+											<a class="ajaxify" href="http://localhost:8080/rwe-web/setting/list.page" data-nav="setting/list.page" title="Advance Setting">
+												Advance Setting
+											</a>
+										</li>
+									
+								</ul>
+							</li>
+						</ul>
+					</li>
+				
+				
+					<li>
+						<a href="http://localhost:8080/rwe-web/api/document.page" target="_blank">
+							<i class="fas fa-book"></i>
+							<span class="title">
+							API Documents
+						</span>
+						</a>
+					</li>
+				
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+	<div class="page-content demo-mode-on" style="min-height:644px">
+		<div class="page-tags-container">
+			<div class="scroll-container page-tags-wrapper">
+				<div class="scroll-wrapper">
+				</div>
+			</div>
+		</div>
+		
+			<div class="note note-warning margin-top-20">
+				<span class="label label-danger">NOTE!</span>
+				<span class="bold">Demo mode</span>
+				<span>: The study is currently set to operate in demonstration &amp; training mode. Do not input any real data.</span>
+			</div>
+		
+		<!-- BEGIN CONTENT -->
+		<div id="content" class="page-content-body tab-content"><div class="col-md-12 page-timeout"><div class="number font-green">Timeout</div><div class="details"><h3>Oops! Your session has timed out.</h3><p>Please click the following link.<br><a class="btn btn-xs btn-outline green-sharp" href="javascript:window.location.reload();"> Return home </a> or try to refresh this page by pressing 'F5'.</p></div></div></div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+</div>
+<!-- END CONTENT -->
+
+<div class="page-footer">
+	<div class="page-footer-inner">
+		2016 - 2021 © rwebox made with <i class="fas fa-heart font-red-haze"></i> by <a target="_blank" href="javascript:;">GenomSeqCare</a>
+		|
+		Last Build: 2021-06-21 08:48
+		Version: 1.11.0-12608 |
+		<a href="http://localhost:8080/rwe-web/terms/services.page" target="_blank">
+			Terms of Services
+		</a> |
+		<a href="http://localhost:8080/rwe-web/privacy/policy.page" target="_blank">
+			Privacy Policy
+		</a>
+	</div>
+	<div class="scroll-to-top">
+		<i class="far fa-arrow-alt-circle-up"></i>
+	</div>
+</div>
+<!-- END CONTAINER -->
+<!--[if lt IE 9]>
+<script src="/rwe-web/theme/assets/static/ie.js?v=1.9.0.20210429" type="application/javascript"></script>
+<![endif]-->
+<script type="text/javascript" async="" src="./rwebox.com_files/analytics.js"></script><script src="./rwebox.com_files/util.js" type="text/javascript"></script>
+<script src="./rwebox.com_files/engine.js" type="text/javascript"></script>
+<script src="./rwebox.com_files/core.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/vendor.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/bootstrap.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/rwe.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/theme.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/i18n.js" type="application/javascript" charset="UTF-8"></script>
+<script src="./rwebox.com_files/media.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/echarts.min.js" type="application/javascript"></script>
+<script src="./rwebox.com_files/world.js" type="application/javascript"></script>
+<script type="application/javascript">
+	// global variates
+	var locale = 'en_GB';
+	var lang = 'en';
+	var format = 'dd/MM/yyyy';
+	var pattern = 'dd/MM/yyyy HH:mm';
+	var timeout = '1500';
+	var jsFormat = format.replace("MM", "mm");
+	var contextPath = "/rwe-web";
+	var openmrsContextPath = '/rwe-web';
+	var currentStudyId = '22';
+	var currentUserId = '1';
+
+	function switchStudy(studyId) {
+		window.location.href = 'switchStudy/' + studyId;
+	}
+
+	function refreshIndex() {
+		$.get("cohort/refreshIndex",
+			function (data) {
+				if (data.errmsg != null && data.errmsg != "") {
+					Metronic.sweetAlert("success", "Error", data.errmsg, {
+						confirmButtonText: 'OK',
+						confirmButtonClass: 'green-sharp'
+					});
+					return;
+				}
+
+				Metronic.sweetAlert("success", "Successful", "Refresh Index action succeed !", {
+					confirmButtonText: 'OK',
+					confirmButtonClass: 'green-sharp'
+				});
+			}
+		);
+	}
+
+	function changeMainEnvironment(obj) {
+		window.location.href = "switchMainEnvironment.page";
+	}
+
+	function changeTestEnvironment(obj) {
+		var $this = $(obj);
+		var usedEnvironment
+		if ($this.hasClass("active")) {
+			usedEnvironment = 0;
+		} else {
+			usedEnvironment = 1;
+		}
+		window.location.href = "switchTestEnvironment/" + usedEnvironment + ".page";
+	}
+
+	var refreshinit = false;
+
+	function rebuildVisitAttribute() {
+		$("#rebuild-visit-attribute-progress").modal('show');
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "rebuild/visit/attribute",
+			success: function (res) {
+				if (res.success) {
+					if (!refreshinit) {
+						refresh(res.prefix)
+					}
+				} else {
+					$("#rebuild-visit-attribute-progress").modal('hide');
+					Metronic.sweetAlert(
+						"error",
+						"Error",
+						"Operation has failed!："
+						+ res.errorMessage, {
+							confirmButtonText: 'OK',
+							confirmButtonClass: 'green-sharp'
+						});
+				}
+			}
+		});
+	}
+
+	function refresh(prefix) {
+		refreshinit = true;
+		interval = setInterval(function () {
+			$.ajax({
+				type: "GET",
+				url: "rebuild/visit/attribute/getProcess?prefix=" + prefix,
+				dataType: "json",
+				success: function (res) {
+					if (res.progresss == 'error') {
+						$("#rebuild-visit-attribute-progress").modal('hide');
+						$('#visit-attribute-progress').css("width", "0%");
+						clearInterval(interval);
+						refreshinit = false;
+						Metronic.sweetAlert("error", "Error",
+							"Failed to rebuild visit attribute!", {
+								confirmButtonText: 'OK',
+								confirmButtonClass: 'green-sharp'
+							});
+					} else {
+						$('#visit-attribute-progress').show();
+						$('#visit-attribute-progress').css("width", res.progresss + "%");
+						if (res.progresss == '100') {
+							$("#rebuild-visit-attribute-progress").modal('hide');
+							$('#visit-attribute-progress').css("width", "0%");
+							clearInterval(interval);
+							refreshinit = false;
+							Metronic.sweetAlert(
+								"success",
+								"Success",
+								"Rebuild visit attribute successful", {
+									confirmButtonText: 'OK',
+									confirmButtonClass: 'green-sharp'
+								});
+						}
+					}
+				}
+			});
+		}, 1500);
+	}
+
+
+	jQuery(document).ready(function () {
+		if ($("#hdnForcePassword").val() == "true") {
+			window.location.href = "/rwe-web/forcePassword";
+		}
+
+		// setup global ajax call
+		$.ajaxSetup({
+			statusCode: {
+				401: function () {
+					$(window.location).attr('href', 'logout.page');
+				}
+			},
+			cache: true
+		});
+
+		// initial metronic core components
+		Metronic.init();
+
+		// initial current layout
+		Layout.init();
+
+		// initial app features
+		App.init();
+
+		// user idle timeout
+		$(document).idleTimeout({
+			redirectUrl: 'logout.page',
+			idleTimeLimit: timeout, // 25 minute
+			idleCheckHeartbeat: 2,
+			// configure which activity events to detect
+			activityEvents: 'click keypress scroll wheel mousewheel mousemove',
+			// warning dialog box configuration
+			enableDialog: true,
+			dialogDisplayLimit: 20,
+			dialogTitle: 'Your session is about to expire.',
+			dialogText: 'You session will be locked in',
+			dialogConfirmText: 'Do you want to continue your session?',
+			dialogStayLoggedInButton: 'Yes, Keep Working',
+			dialogLogOutNowButton: 'No, Logout',
+			// server-side session keep-alive timer
+			sessionKeepAliveTimer: 600,
+			sessionKeepAliveUrl: 'keepAlive.page'
+		});
+
+		// set moment.s locale
+		moment.locale(locale);
+
+		$("a.switch-lang").off("click").on("click", function (e) {
+			e.preventDefault();
+			$.get($(this).attr('href'), {}, function () {
+				window.location.reload();
+			});
+		});
+
+		if (localStorage.getItem('tour') === 'true') {
+			$("#quick-nav-help span").text('End Tour');
+			$("#quick-nav-help").on("click", function () {
+				localStorage.setItem('tour', 'false');
+				introJs().exit();
+				window.location.href = '?page=' + encodeURIComponent('study/dashboard.page');
+			});
+		} else {
+			$("#quick-nav-help span").text('Help');
+			$("#quick-nav-help").on("click", function () {
+				localStorage.setItem('tour', 'true');
+				localStorage.setItem('tourNextPage', 'false');
+				window.location.href = '?page=' + encodeURIComponent('study/dashboard.page');
+			});
+		}
+
+		// disable google analytics by default
+		window['ga-disable-UA-121630108-1'] = true;
+		// initial cookie consent
+		window.cookieconsent.initialise({
+			palette: {
+				popup: {
+					background: "#113d64"
+				},
+				button: {
+					background: "#f1d600",
+					text: "#113d64"
+				}
+			},
+			content: {
+				message: 'This website uses cookies to ensure you get the best experience on our website.',
+				link: 'Learn more',
+				deny: 'Deny',
+				allow: 'Allow',
+				dismiss: 'Dismiss'
+			},
+			position: "bottom-right",
+			type: "opt-in",
+			onInitialise: function (status) {
+				var type = this.options.type;
+				var didConsent = this.hasConsented();
+				if (type == 'opt-in' && didConsent) {
+					window['ga-disable-UA-121630108-1'] = false;
+				}
+				if (type == 'opt-out' && !didConsent) {
+					window['ga-disable-UA-121630108-1'] = true;
+				}
+			},
+			onStatusChange: function (status, chosenBefore) {
+				var type = this.options.type;
+				var didConsent = this.hasConsented();
+				if (type == 'opt-in' && didConsent) {
+					window['ga-disable-UA-121630108-1'] = false;
+				}
+				if (type == 'opt-out' && !didConsent) {
+					window['ga-disable-UA-121630108-1'] = true;
+				}
+			},
+			onRevokeChoice: function () {
+				var type = this.options.type;
+				if (type == 'opt-in') {
+					window['ga-disable-UA-121630108-1'] = true;
+				}
+				if (type == 'opt-out') {
+					window['ga-disable-UA-121630108-1'] = false;
+				}
+			}
+		});
+
+		if (false) {
+			$('#test-change-btn').addClass('active');
+		} else {
+			$('#test-change-btn').removeClass('active');
+		}
+
+		// hide loader animation
+		$(".loader").fadeOut("slow");
+
+		// set crfs protection for any xhr requests
+		$.ajaxSetup({
+			beforeSend: function (xhr, settings) {
+				if (!(/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type)) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRF-TOKEN", "19beec72-f9e2-424d-b4dc-6fa685839c37");
+				}
+			}
+		});
+		dwr.engine.setHeaders({
+			"X-CSRF-TOKEN": "19beec72-f9e2-424d-b4dc-6fa685839c37"
+		});
+	});
+</script>
+<!-- END JAVASCRIPTS -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./rwebox.com_files/js"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+
+	gtag('js', new Date());
+
+	gtag('config', 'UA-121630108-1');
+</script>
+
+<!-- END BODY -->
+
+</body></html>

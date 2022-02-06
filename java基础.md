@@ -208,8 +208,102 @@
            }
        }
        ```
-        
-        
+# 泛型
+E — Element，常用在java Collection里，如：List<E>,Iterator<E>,Set<E>
+K,V — Key，Value，代表Map的键值对
+N — Number，数字
+T — Type，类型，如String，Integer等等
+这里的E,K,V,N,T可以是任何字母，只不过写成这样是为了更有代表意义
+这个<T> T 表示返回值T的类型是泛型，T是一个占位符，用来告诉编译器，这个东西是先给我留着， 等我编译的时候再告诉你是什么类型。
+private <T> T getListFisrt(List<T> data) {
+    if (CollectionUtils.isEmpty(data)) {
+      return null;
+    }
+    return data.get(0);
+}
+T和？
+    T和？运用的地方有点不同,?是定义在引用变量上,T是类上或方法上
+    “<T>"和"<?>"，首先要区分开两种不同的场景：
+        类型参数“<T>”主要用于第一种，声明泛型类或泛型方法。
+        无界通配符“<?>”主要用于第二种，使用泛型类或泛型方法
+    ?号通配符表示可以匹配任意类型，任意的Java类都可以匹配。
+    只能调对象与类型无关的方法，不能调用对象与类型有关的方法。
+Java中泛型T和Class<T>以及Class<?>
+    单独的T代表一个类型，而Class<T>和Class<?>代表这个类型所对应的类
+    Class<T>在实例化的时候，T要替换成具体类
+    Class<?>它是个通配泛型，?可以代表任何类型   
+    <? extends T>受限统配，表示T的一个未知子类。
+    <? super T>下限统配，表示T的一个未知父类。
+public T find(Class<T> clazz, int id);
+    根据类来反射生成一个实例，而单独用T没法做到。
+<T> T 用法
+    这个<T> T 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编译的时候，告诉你。
+    public class Demo {
+        public static void main(String[] args) {
+            Demo demo = new Demo();
+            //获取string类型
+            List<String> array = new ArrayList<String>();
+            array.add("test");
+            array.add("doub");
+            String str = demo.getListFisrt(array);
+            System.out.println(str);
+            //获取nums类型
+            List<Integer> nums = new ArrayList<Integer>();
+            nums.add(12);
+            nums.add(13);
+            Integer num = demo.getListFisrt(nums);
+            System.out.println(num);
+        }
+        /**
+         * 这个<T> T 可以传入任何类型的List
+         * 参数T
+         *     第一个 表示是泛型
+         *     第二个 表示返回的是T类型的数据
+         *     第三个 限制参数类型为T
+         * @param data
+         * @return
+         */
+        private <T> T getListFisrt(List<T> data) {
+            if (data == null || data.size() == 0) {
+                return null;
+            }
+            return data.get(0);
+        }
+    
+    }
+T 用法
+    返回值，直接写T表示限制参数的类型，这种方法一般多用于共同操作一个类对象，然后获取里面的集合信息啥的。
+    public class Demo2<T> {
+        public static void main(String[] args) {
+            //限制T 为String 类型
+            Demo2<String> demo = new Demo2<String>();
+            //获取string类型
+            List<String> array = new ArrayList<String>();
+            array.add("test");
+            array.add("doub");
+            String str = demo.getListFisrt(array);
+            System.out.println(str);
+            //获取Integer类型 T 为Integer类型
+            Demo2<Integer> demo2 = new Demo2<Integer>();
+            List<Integer> nums = new ArrayList<Integer>();
+            nums.add(12);
+            nums.add(13);
+            Integer num = demo2.getListFisrt(nums);
+            System.out.println(num);
+        }
+        /**
+         * 这个只能传递T类型的数据
+         * 返回值 就是Demo<T> 实例化传递的对象类型
+         * @param data
+         * @return
+         */
+        private T getListFisrt(List<T> data) {
+            if (data == null || data.size() == 0) {
+                return null;
+            }
+            return data.get(0);
+        }
+    }
 
 
 java运行机制

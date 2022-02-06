@@ -27,7 +27,6 @@ public class ReentrantLock2 {
     //也可以指定tryLock的锁定时间
     public void m2() {
         try {
-            //Boolean locked = lock.tryLock();
             Boolean locked = lock.tryLock(2, TimeUnit.SECONDS);
             System.out.println(locked);
             if (locked) {

@@ -28,14 +28,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //如果是这样的话就耗费太多时间才能返回
-        /*
         Thread.sleep(5 * 1000);
         ctx.writeAndFlush(Unpooled.copiedBuffer("channelRead。。。", CharsetUtil.UTF_8));
-         */
 
         //任务队列三种典型的使用场景
-        /*
-        场景1: 用户自定义普通的任务
+        //场景1: 用户自定义普通的任务
         ctx.channel().eventLoop().execute(() -> {
             try {
                 Thread.sleep(5 * 1000);
@@ -45,7 +42,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             ctx.writeAndFlush(Unpooled.copiedBuffer("channelRead1。。。", CharsetUtil.UTF_8));
         });
 
-        注意这里会休眠十五秒才会返回数据
+        //注意这里会休眠十五秒才会返回数据
         ctx.channel().eventLoop().execute(() -> {
             try {
                 Thread.sleep(10 * 1000);
@@ -54,7 +51,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             }
             ctx.writeAndFlush(Unpooled.copiedBuffer("channelRead1。。。", CharsetUtil.UTF_8));
         });
-         */
 
         //场景2：用户自定义定时任务（该任务放在scheduleTaskQueue）
         ctx.channel().eventLoop().schedule(() -> {

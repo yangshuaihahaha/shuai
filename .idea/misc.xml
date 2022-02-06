@@ -14,7 +14,6 @@
         <option value="$PROJECT_DIR$/dubbo/pom.xml" />
         <option value="$PROJECT_DIR$/shuai-interface/pom.xml" />
         <option value="$PROJECT_DIR$/order-service-consumer/pom.xml" />
-        <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/netty/pom.xml" />
         <option value="$PROJECT_DIR$/elasticsearch/pom.xml" />
         <option value="$PROJECT_DIR$/es-mysql/pom.xml" />
@@ -25,10 +24,15 @@
         <option value="$PROJECT_DIR$/demo-spring-boot-starter/pom.xml" />
         <option value="$PROJECT_DIR$/spring-boot-cas/pom.xml" />
         <option value="$PROJECT_DIR$/cloud2021/pom.xml" />
+        <option value="$PROJECT_DIR$/reactor/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-source-code/pom.xml" />
+        <option value="$PROJECT_DIR$/FlinkTutorial/pom.xml" />
+        <option value="$PROJECT_DIR$/UserBehaviorAnalysis/pom.xml" />
+        <option value="$PROJECT_DIR$/Kubernetes/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/spring-source-code/out" />
   </component>
 </project>

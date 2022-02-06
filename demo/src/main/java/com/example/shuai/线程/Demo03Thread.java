@@ -1,5 +1,4 @@
 package src.main.java.com.example.shuai.线程;
-
 //如果只对写方法加了锁，而读方法不加锁，也可能造成脏读
 public class Demo03Thread {
     String name;
