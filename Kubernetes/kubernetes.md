@@ -119,8 +119,53 @@ Service类型：
     LoadBalancer：在NodePort的基础上，借助cloud provider创建一个外部负载均衡器，并请求转发到<NodeIP>:NodePort
     ExternalName：把集群外部的服务引入到集群内部来，在集群内部直接使用。没有任何类型代理被创建，这只有Kubernetes1.7或者更高版本的K8s才支持
     ![](./image/svc技术原理图.png)
+代理模式分类：
+    VIP和Service代理：
+        在Kubernetes集群中，每个Node运行一个kube-proxy进程。kube-proxy负责为service实现了一种VIP（虚拟IP）的形式，而不是ExternalName的形式。
+        在Kubernetes v1.0版本，代理完全在userspace。在Kubernetes v1.1版本，新增了iptables代理，但是并不是默认的运行模式
+        从Kubernetes v1.2起，默认就是iptables代理。在Kubernetes v1.14版本开始默认使用ipvs代理
+        在Kubernetes v1.0版本，Service是4层（TCP/UDP over IP）概念。在Kubernetes v1.1版本新增了Ingress API（beta版），开始表示"7层"（HTTP）服务
+    为什么不实用round-robin DNS？进行负载均衡？
+        因为DNS有缓存
+    1，userspace代理模式
+        需要kube-proxy进行一层代理
+        ![](./image/userspace代理模式.png)
+    2，iptables代理模式
+        所有的代理直接由防火墙iptables进行代理，而不需要kube-proxy
+        ![](./image/iptables代理模式.png)
+    3，ipvs代理模式
+        这种模式，kube-proxy会监视Kubernetes service对象和Endpoints，调用netlink接口以相应的创建ipvs规则并定期与kubernetes service对象和endpoints对象同步ipvs规则
+        以确保ipvs状态与期望一致。访问服务时，流量将被重定向到其中一个后段pod；
+        与iptables类似，ipvs于netfilter的hook功能，但使用哈希表座位底层数据结构并在内核空间中工作。这意味着ipvs可以更快的重定向流量，并在同步代理规则时具有更好的性能。此外，ipvs为负载均衡提供了更多选项，例如：
+            rr：轮训调度
+            lc：最小连接数
+            dh：目标哈希
+            sh：源哈希
+            sed：最短希望延迟
+            nq：不排队调度
+        ![](./image/ipvs代理模式.png)
+    ClusterIP Service的创建
+        clusterIP主要在每个node节点使用iptables，将发向clusterIP对应端口的数据，转发到kube-proxy中。
+        然后kube-proxy自己内部实现有负载均衡的方法，并可以查到这个service下对应pod的地址和端口，进而把数据转发给对应的pod地址和端口
+        为了实现上述功能，需要几个组件协调工作：
+            ![](./image/几个组件协调工作.png)
+        ![](./image/创建Cluster类型的Service.png)
+    Headless Service的创建
+        有时不需要或者不想要负载均衡，以及单独的Service IP。遇到这种情况，可以通过指定CLuster IP（spec.clusterIP）的值为"Node"来创建Headless Service。
+        这类的service并不会分配Cluster IP，kube-proxy不会处理它们，而且平台也不会为它们进行负载均衡和路由
+        ![](./image/创建Headless类型的Service.png)
+    NodePort Service的创建
+        nodeport的原理在于在node上开了一个端口，将向该端口的流量导入到kube-proxy，然后由kube-proxy进一步到给对应的pod
+        ![](./image/创建NodePort类型的Service.png)
+    NodePort Service的创建（付费）
+        ![](./image/LoadBalancer类型的Service.png)
+    ExternalName Service的创建
+        ![](./image/创建ExternalName类型的Service.png)
 
     
+
+    
+        
 
 
 
@@ -227,8 +272,56 @@ Pod phase可能存在的可能性：
     也就是Pod的status
     ![](./image/Pod phase可能存在的值.png)
 
+# ingress
+![](./image/Nginx-Ingress.png)
+入口网络是充当Kubernetes集群入口点的规则的集合。这允许入站连接，可以将其配置为通过可访问的URL，负载平衡流量或通过提供基于名称的虚拟主机在外部提供服务。
+因此，Ingress是一个API对象，通常通过HTTP管理群集中对服务的外部访问，这是公开服务的最强大方法
+1，Ingress HTTP代理访问
+![](./image/Ingress HTTP代理访问-deployment.yaml.png)
+![](./image/Ingress HTTP代理访问-service.yaml.png)
+![](./image/Ingress HTTP代理访问-ingress.yaml.png)
+2，Ingress HTTPS代理访问
+![](./image/Ingress HTTPS代理访问-证书以及cert存储方式.png)
+![](./image/Ingress HTTPS代理访问-ingress.yaml.png)
 
 
+# 存储
+## 1，Config Map
+ConfigMap功能是在Kubernetes1.2版本中引入，许多应用程序会从配置文件、命令行参数或者环境变量中读取配置信息
+ConfigMap API给我们提供了向容器中注入配置信息的机制，ConfigMap可以被用来保存单个属性，也可以用来保存整个配置文件或者JSON二进制大对象
+ConfigMap的创建：
+    1，使用目录创建：
+        ![](./image/使用目录创建ConfigMap.png)
+        -from-file指定在目录下的所有文件都会被用在ConfigMap里面创建一个键值对，键的名字就是文件名，值就是文件内容
+    2，使用文件创建
+        ![](./image/使用文件创建ConfigMap.png)
+        -from-file这个参数可以使用多次，你可以使用两次分别指定上个实例中的那两个配置文件，效果就跟指定整个目录是一样的
+    3，使用字面值创建
+        ![](./image/使用字面值创建ConfigMap.png)
+        使用字面值创建，利用-from-literal参数传递配置信息，该参数可以使用多次
+在Pod中使用ConfigMap：
+    ![img.png](./image/创建special-config以及env-config.png)
+    ![img.png](./image/pod中使用ConfigMap.png)
+用ConfigMap设置命令行参数
+    ![img.png](./image/用ConfigMap设置命令行参数.png)
+在数据卷里面使用ConfigMap
+    最基本的就是将文件填入数据卷，在这个文件中，键就是文件名，键值就是文件内容
+    ![img.png](./image/在数据卷里面使用ConfigMap.png)
+ConfigMap的热更新
+    ![img.png](./image/log-config.png)
+    ![img.png](./image/ConfigMap热更新.png)
+    修改ConfigMap以热更新：
+        kubectl edit configmap log-config
+    修改log_level的值为DEBUG等待大概10秒钟时间，再次查看环境变量的值
+        打印查看：kubectl exec my-nginx-7b55868ff4-hzq22 -it --car /etc/log_level
+    注意：ConfigMap如果以env的方式挂载到容器，修改ConfigMap并不会实现热更新
+## 2，Secret
+Secret解决了密码、token、密钥等敏感数据的配置问题，而不需要吧这些敏感数据暴露到镜像或者Pod Spec中。Secret可以以volume或者环境变量的方式使用。
+Secret有三种类型：
+    Service Account：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secret/kubernetes.io/serviceaccount目录中
+    Opaque：base64编码格式的secret，用来存储密码、密钥等
+    Kubernetes.io/dockerconfigjson：用来存储私有docker registry的认证信息
+    
 
 
 
