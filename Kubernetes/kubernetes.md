@@ -321,6 +321,50 @@ Secret有三种类型：
     Service Account：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secret/kubernetes.io/serviceaccount目录中
     Opaque：base64编码格式的secret，用来存储密码、密钥等
     Kubernetes.io/dockerconfigjson：用来存储私有docker registry的认证信息
+## Service Account
+Service Account用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secret/kubernetes.io/serviceaccount目录中
+![img.png](./image/Service Account使用.png)
+## Opaque Secret
+1，创建说明
+Opaque类型的数据是一个map类型，要求value是base64编码格式：
+![img.png](./image/base64编码格式.png)
+![img.png](./image/secrets.yml.png)
+2，使用方式
+![img.png](./image/将Secret挂载到Volume.png)
+![img.png](./image/将Secret导出到环境变量.png)
+3，kubernetes.io/dockerconfigjson
+使用Kuberctl创建docker registry认证的secret
+![img.png](./image/使用kuberctl创建docker registry认证的secret.png)
+![img.png](./image/通过imagePullSecres来引用创建myregistrykey.png)
+## 3，Volume
+容器磁盘上的文件的生命周期是短暂的，这就使得在容器中运行重要应用时会出现一些问题。首先，当容器崩溃时，kubelet会重启它，但是容器中的文件将丢失---容器以干净的状态（镜像最初的状态）重新启动。
+其次，在pod中同时运行多个容器，这些容器之间通常需要共享文件。Kubernetes中的vloume抽象就很好的解决了这些问题
+背景：
+Kubernetes中的卷有明确的寿命---与封装它的pod相同。所以，卷的生命比Pod中的所有容器都长，当这个容器重启时数据仍然得以保存。
+当然，当Pod不再存在时，卷也将不复存在。也许更重要的是，Kubernetes支持多种类型的卷，Pod可以同时使用任意数量的卷
+卷的类型：
+    ![img.png](./image/Kubernetes支持以下类型的卷.png)
+    emptyDir：
+        当Pod被分配给节点时，首先创建emptyDir卷，并且只要该Pod在该节点上运行，该卷就会存在。
+        正如卷的名字所述，它最初是空的。Pod中的容器可以读取或写入emptyDir卷中的相同文件，尽管该卷可以挂载到每个容器中的相同或不同路径上。
+        当出于任何原因从节点中删除Pod时，emptyDir中的数据永久删除
+        emptyDir的用法有：
+            - 暂存空间，例如用于基于磁盘的合并排序
+            - 用作长时间计算崩溃时的检查点
+            - Web服务器容器提供数据时，保存内存管理器容器提取的文件
+
+
+
+
+
+
+
+
+https://mp.weixin.qq.com/s/2HwYG43pDP_5lSGPN825ZA
+        
+
+
+
     
 
 
