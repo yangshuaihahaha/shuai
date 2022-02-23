@@ -26,7 +26,13 @@ java支持三种网络编程模型/IO模式：BIO, NIO, AIO
 线程去处理，一般适用于连接数较多且连接时间较长的应用
 场景适用于连接数目比较多且连接比较长的架构，比如相册服务器
 
-# NIO的三大核心组件
+# 为什么netty不使用AIO
+1，NIO就好比做好了餐自己去取，AIO相当于送餐上门。要吃饭的人百万、千万级别，送餐的也就几百人。
+2，Netty不看重Windows上的使用，在Linux上，AIO的底层实现使用EPOLL没有很好的实现AIO，因此性能上没有明显的优势
+3，Netty是reactor模型，而AIO是proactor模型，混合在一起使用会非常混乱
+4，AIO还有个缺点是接受数据需要预先分配缓存，而不是NIO那种接受时才需要分配缓存，所以对连接数量大但流量小的情况内存浪费很多
+
+# NIO基本模型
 Selector，Channel，Buffer
 1）每个channel都会对应一个Buffer
 2）Selector对应一个线程，一个线程对应多个channel
@@ -78,9 +84,8 @@ Reactor通过Selector监控客户端的请求，收到请求后创建Handler对�
 
 ### 2, 单reactor多线程
 #### 实现
-Reactor通过Selector监控客户端的请求，如果是连接请求通过Acceptor创建Handler对象，
-处理完成连接后的事件。如果不是连接请求，则调用连接对应的Handler来处理，这里的Handler
-只负责响应事件，不做具体的业务处理，会分发给后面的worker线程池处理具体的业务
+Reactor通过Selector监控客户端的请求，如果是连接请求通过Acceptor创建Handler对象，处理完成连接后的事件。
+如果不是连接请求，则调用连接对应的Handler来处理，这里的Handler只负责响应事件，不做具体的业务处理，会分发给后面的worker线程池处理具体的业务
 #### 优点：
 充分利用多核cpu的处理能力
 ####缺点
@@ -89,9 +94,9 @@ reactor处理所有的事件和响应，在单线程中运行，在高并发场�
 
 ### 3, 主从reactor多线程
 #### 实现
-Reactor的主线程MainReactor会监听连接事件，收到事件后会通过Acceptor处理事件
-连接事件后，MainReactor将连接分配给SubReactor，SubReactor将连接加入到连接队列监听
-并创建Handler进行事件的处理，后面就会将具体的处理分发给worker线程池处理
+1，Reactor的主线程MainReactor会监听连接事件，收到连接事件后会通过Acceptor建立连接；
+2，然后MainReactor将连接分配给SubReactor，SubReactor将连接加入到连接队列监听
+3，SubReactor创建Handler进行事件的处理，后面就会将具体的处理分发给worker线程池处理
 
 #### 优点
 响应快，不必为单个同步时间阻塞，虽然Reactor本身是同步的
@@ -118,12 +123,10 @@ Reactor的主线程MainReactor会监听连接事件，收到事件后会通过Ac
 
 
 方案再说明
-NioEventLoop表示一个不断循环的处理任务的线程，每个NioEventLoop都有一个
-selector，用于监听绑定在其上的socket网络通道
+NioEventLoop表示一个不断循环的处理任务的线程，每个NioEventLoop都有一个selector，用于监听绑定在其上的socket网络通道
 NioEventLoop采用串行化设计，从消息读取->解码->编码->发送，始终由IO线程NioEventLoop负责
 
 
-NioEventLoopGroup下包含多个NioEventLoop
 每个NioEventLoop中包含有一个selector，一个taskQueue
 每个NioEventLoop的selector上可以注册监听多个NioChannel
 每个NioChannel只会绑定在唯一的一个NioEventLoop上
@@ -134,13 +137,12 @@ Channel
 1）Netty网络通信的组件，能够用于执行网路的IO操作
 2）通过Channel可获得当前网络的连接状态
 3）通过Channel可获得网络连接的参数配置
-4）channel提供异步的网路IO操作（如建立连接，读写，绑定端口），异步意味着任何IO调用将立即返回，并且不保证
-在调用结束时所有请求IO操作完成
+4）Channel提供异步的网路IO操作（如建立连接，读写，绑定端口），异步意味着任何IO调用将立即返回，并且不保证在调用结束时所有请求IO操作完成
 5）调用立即返回一个ChannelFuture实例，通过注册监听器到ChannelFuture上，可以在IO操作成功，失败，取消时回掉通知对方
 6）支持关联IO操作与对应的处理程序
 7）不同协议，不同阻塞类型的连接都有不同的channel类型与之对应，
 常用的channel类型：
-NioSocketCHannel 异步的客户端TCP Socket连接
+NioSocketChannel 异步的客户端TCP Socket连接
 NioServerSocketChannel 异步的服务端TCP Socket连接
 NioDatagramChannel 异步的UDP连接
 NioSctpChannel 异步的客户端Sctp连接
@@ -188,7 +190,7 @@ EventLoopGroup和其实现类NioEventLoopGroup
 一般会有多个EventLoop同时工作，每个EventLoop维护者一个Selector实例
 2）EventLoopGroup提供next接口，可以从组里面按照规则获取其中一个
 EventLoop来处理任务，在netty编程中，我们一般需要两个EventLoopGroup，比如
-BossEventloopGroup和WorkerEventLoopGriup
+BossEventloopGroup和WorkerEventLoopGroup
 3）通常一个服务端口即一个ServerSocketChannel对应一个Selector和一个EventLoop线程
 1. BossEventLoop负责接受客户端的连接并将SocketChannel交给WorkerEventLoopGroup进行IO处理
 BossEventLoopGroup通常是一个单线程的EventLoop，EventLoop维护者一个注册了ServerSocketChannel的

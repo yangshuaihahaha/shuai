@@ -281,7 +281,47 @@ SyncTransmission
                                     Context.getService(SyncService.class).saveOrUpdate(o);
                                 }
                                 return;
-                          	
+
+数据同步使用netty
+长连接模式：
+    服务器性能还不错，客户端数量比较少，对"报文数据"实时性要求比较高所以使用的是长连接模式
+    1，创建连接
+    2，发送心跳包
+    3，一段时间没有接收到心跳包或者用户主动关闭之后关闭连接
+长连接模式下连接的维护工作怎么做？
+    客户端间隔5分钟，向服务器发送一次心跳报文，如果服务器回应正常，那就无所谓，如果不回应，一般就直接断开连接，然后重新向服务器申请新的连接
+    实现：
+通过ssl进行认证
+    Netty SSL安全特性：Netty通过SSLHandler提供了SSL的支持，它支持的SSL协议类型包括：SSL V2、SSL V3和TLS
+    SSL单项认证：客户端只验证服务端的合法性，服务端不验证客户端
+    1，利用JDK的keytool工具生成自签名证书
+        （1）生成Netty服务器私钥和证书仓库：
+        `keytool -genkey -alias securechat -keysize 2048 -validity 365 -keyalg RSA -dname "CN=localhost" -keypass sNetty -storepass sNetty -keystore sChat.jks`
+        （2）生成Netty服务端自签名证书：
+        `keytool -genkey -alias smcc -keysize 2048 -validity 365 -keyalg RSA -dname "CN=localhost" -keypass cNetty -storepass cNetty -keystore cChat.jks`
+        （3）生成客户端的密钥对和证书仓库，用于服务端的证书保存到客户端的授信证书仓库中：
+        `keytool -export -alias securechat -keystore sChat.jks -storepass sNetty -file sChat.cer`
+        （4）将Netty服务端的证书导入到客户端的证书仓库中：
+        `keytool -import -trustcacerts -alias securechat -file sChat.cer -storepass cNetty -keystore cChat.jks`
+    2，核心代码
+        详见/Users/yangshuai/project/shuai/netty/src/main/java/com/shuai/netty/ssl
+    3，认证原理
+        （1）SSL客户端向服务端传送客户端SSL协议的版本号、支持的加密算法种类产生的随机数等信息
+        （2）服务端返回握手答应，向客户端传送确认SSL协议的版本号、支持的加密算法种类产生的随机数等信息
+        （3）服务端向客户端发送自己的公钥；
+        （4）客户端对服务端的证书进行认证，服务端的合法性校验包含：证书是否过期、发行服务器证书的CA是否可靠、发行者证书的公钥能否正确解开服务器的“发行者的数组签名”、服务器证书上的域名是否和服务器的实际域名相匹配等；
+        （5）客户端随机生成一个用于后面通讯的“对称密码”，然后用服务端的公钥对其加密，将加密后的“预主密码”传给服务端；
+        （6）服务端将自己的私钥解开加密的“预主密码”，然后执行一系列步骤来产生主密码；
+        （7）客户端向服务端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知服务器客户端的握手过程结束；
+        （8）服务端向客户端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知客户端服务器端的握手过程结束；
+        （9）SSL的握手部分结束，SSL安全通道建立，客户端和服务端开始使用相同的对称密钥对数据进行加密，然后通过Socket进行传输
+
+
+
+
+
+
+
 
                         
 

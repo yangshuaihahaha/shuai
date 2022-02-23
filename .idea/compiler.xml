@@ -41,7 +41,7 @@
       <module name="netty" target="8" />
       <module name="NetworkFlowAnalysis" target="1.8" />
       <module name="order-service-consumer" target="1.8" />
-      <module name="reactor" target="1.5" />
+      <module name="reactor" target="8" />
       <module name="rocketmq-demo" target="1.8" />
       <module name="shuai-interface" target="1.5" />
       <module name="spring-boot-cas" target="1.8" />

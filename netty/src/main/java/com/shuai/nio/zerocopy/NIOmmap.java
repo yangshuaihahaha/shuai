@@ -1,4 +1,4 @@
-package com.shuai.nio;
+package com.shuai.nio.zerocopy;
 
 /*
 1，MappedByteBuffer 可以让文件在内存中直接修改，操作系统不需要再拷贝一次
@@ -8,7 +8,7 @@ import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class NIOMappedByteBuffer {
+public class NIOmmap {
 
     public static void main(String[] args) throws Exception {
         RandomAccessFile randomAccessFile = new RandomAccessFile("/Users/yangshuai/project/shuai/netty/src/main/java/com/shuai/nio/1.txt", "rw");
