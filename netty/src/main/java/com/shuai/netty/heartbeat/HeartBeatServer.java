@@ -34,7 +34,8 @@ public class HeartBeatServer {
                             ChannelPipeline pipeline = channel.pipeline();
                             pipeline.addLast("decoder", new StringDecoder());
                             pipeline.addLast("encoder", new StringEncoder());
-                            pipeline.addLast(new IdleStateHandler(2,2,2, TimeUnit.SECONDS));
+                            //每隔5s检查一下是否有读事件发生，如果没有就触发HeartBeatClientHandler中的userEventTriggered向客户端发送心跳
+                            pipeline.addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
                             pipeline.addLast(new HeartBeatClientHandler());
                         }
                     });

@@ -393,6 +393,34 @@ netty中怎么解决
     4，基于长度域拆包器LengthFieldBasedFrameDecoder
         是最通用的拆包器，只要你的自定义协议中包含长度域字段，均可以使用这个拆包器来实现应用层拆包。
 
+# NioEventLoopGroup源码
+基本思路：
+    1，我们在new一个work/boss线程的时候一般采用的直接使用无参的构造方法，但是无参的构造方法他创建的线程池的大小就是我们CPU的核心的两倍。
+    紧接着就需要new这么多线程放到线程池里面，这里的线程池采用的数据结构是一个数组存放的，每一个线程需要设置一个任务队列，显然任务队列是一个阻塞队列，这里采用的是LinkedBlockQueue。
+    然后回想一下jdk中的线程池是不是还有一个比较重要的参数就是线程工厂，对的，这里也有这个东西，他是需要我们手动传入的，但是如果不传则会使用一个默认的线程工厂，
+    里面有一个newThread方法，这个方法实现基本和jdk中的实现一摸一样，就是创建一个级别为5的非Daemon线程。对这就是我们在创建一个线程池时候完成的全部工作
+    2，现在来具体说一下，我们每次创建的是NioEventLoopGroup，但是他又继承了n个类才实现了线程池，也就是线程池的祖先是 ScheduledExecutorService 是jdk中的线程池的一个接口，其中里面最重要的数据结构是一个children数组没用来装线程的。
+    3，然后具体的线程的线程也是进行了封装的，也就是我们常看到的NioEventLoop。这个类里面有两个比较重要的结构：taskQueue和thread。很明显这个非常类似jdk中的线程池
+NioEventLoopGroup线程池分析：
+    首先要创建线程池，传入的线程数为0，
+    
+
+
+# ChannelInboundHandlerAdapter基类 和 SimpleChannelInboundHandler基类有什么区别？
+1，SimpleChannelInboundHandler在接收到数据后会自动release掉数据占用的Bytebuffer资源：自动调用Bytebuffer.release()。
+如果在channelRead方法返回前还没有写完数据，也就是当让他release时，就不能继承SimpleChannelInboundHandler基类。
+而继承ChannelInboundHandlerAdapter则不会自动释放，需要手动调用ReferenceCountUtil.release()等方法进行释放
+2，SimpleChannelInboundHandler还有一个好处，可以在泛型参数中，可以直接指定好传输的数据格式。所以继承该类，在处理数据时，不需要判断数据格式。
+而继承ChannelInboundHandlerAdapter则需要进行数据格式的判断和转换
+3，推荐在服务端去继承ChannelInboundHandlerAdapter，建议手动进行释放，防止数据未处理完就自动释放了。
+
+其实这两个抽象类都是有讲究的，在客户端的业务Handler继承的是SimpleChannelInboundHandler，而在服务器端继承的是ChannelInboundHandlerAdapter。
+最主要的区别就是SimpleChannelInboundHandler在接收到数据后会自动release掉数据占用的Bytebuffer资源（自动调用Bytebuffer.release()）。
+为何服务端不能用呢，因为我们想让服务器把客户端请求的数据发送回去，而服务器端有可能在channelRead方法返回前还没有写完数据，因此不能让他release
+
+
+
+
 
 
 
