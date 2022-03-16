@@ -10,16 +10,15 @@
         <module name="springcloudapi" />
         <module name="HotitemsAnalysis" />
         <module name="demo-spring-boot-starter" />
-        <module name="FlinkTutorial" />
         <module name="es-mysql" />
         <module name="cloud-provider-payment8001" />
-        <module name="mybatis-analysis" />
         <module name="spring-boot-cas" />
         <module name="demo" />
+        <module name="Flink" />
         <module name="user-service-provider" />
         <module name="NetworkFlowAnalysis" />
         <module name="shuai-interface" />
-        <module name="elasticsearch" />
+        <module name="Elasticsearch" />
         <module name="order-service-consumer" />
         <module name="电商项目" />
         <module name="netty" />
@@ -37,9 +36,9 @@
       <module name="cloud2021" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="demo-spring-boot-starter" target="1.8" />
-      <module name="elasticsearch" target="1.8" />
+      <module name="Elasticsearch" target="1.8" />
       <module name="es-mysql" target="1.8" />
-      <module name="FlinkTutorial" target="8" />
+      <module name="Flink" target="8" />
       <module name="HotitemsAnalysis" target="1.8" />
       <module name="Kubernetes" target="8" />
       <module name="mybatis-analysis" target="8" />
@@ -63,10 +62,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Elasticsearch" options="-parameters" />
       <module name="cloud-provider-payment8001" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="demo-spring-boot-starter" options="-parameters" />
-      <module name="elasticsearch" options="-parameters" />
       <module name="es-mysql" options="-parameters" />
       <module name="order-service-consumer" options="-parameters" />
       <module name="rocketmq-demo" options="-parameters" />

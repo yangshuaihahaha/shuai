@@ -1,4 +1,4 @@
-package com.shuai.mybatis.beans;
+package com.shuai.源码分析.beans;
 
 
 public class UserBean {

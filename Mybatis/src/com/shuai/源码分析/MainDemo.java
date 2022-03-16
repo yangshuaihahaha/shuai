@@ -1,4 +1,4 @@
-package com.shuai.mybatis;
+package com.shuai.源码分析;
 
 import com.shuai.mybatis.beans.UserBean;
 import com.shuai.mybatis.mapper.UserMapper;

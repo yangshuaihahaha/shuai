@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="maven-wrapper">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dubbo/user-service-provider/.mvn/wrapper/maven-wrapper.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Dubbo/user-service-provider/.mvn/wrapper/maven-wrapper.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -11,7 +11,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="elasticsearch" />
+          <element id="module-output" name="Elasticsearch" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.72" />
@@ -101,9 +101,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/elasticsearch/target/elasticsearch-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/Elasticsearch/target/elasticsearch-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="elasticsearch/web/Web" />
+      <element id="javaee-facet-resources" facet="Elasticsearch/web/Web" />
     </root>
   </artifact>
 </component>

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" filepath="$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlinkTutorial/FlinkTutorial.iml" filepath="$PROJECT_DIR$/FlinkTutorial/FlinkTutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Elasticsearch/Elasticsearch.iml" filepath="$PROJECT_DIR$/Elasticsearch/Elasticsearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Flink/Flink.iml" filepath="$PROJECT_DIR$/Flink/Flink.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hibernate/Hibernate.iml" filepath="$PROJECT_DIR$/Hibernate/Hibernate.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserBehaviorAnalysis/HotitemsAnalysis/HotitemsAnalysis.iml" filepath="$PROJECT_DIR$/UserBehaviorAnalysis/HotitemsAnalysis/HotitemsAnalysis.iml" />
       <module fileurl="file://$PROJECT_DIR$/JUC并发编程/JUC并发编程.iml" filepath="$PROJECT_DIR$/JUC并发编程/JUC并发编程.iml" />
@@ -27,10 +28,8 @@
       <module fileurl="file://$PROJECT_DIR$/cloud2021/cloud2021.iml" filepath="$PROJECT_DIR$/cloud2021/cloud2021.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-cas/demo.iml" filepath="$PROJECT_DIR$/spring-boot-cas/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" filepath="$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/elasticsearch/elasticsearch.iml" filepath="$PROJECT_DIR$/elasticsearch/elasticsearch.iml" />
       <module fileurl="file://$PROJECT_DIR$/es-mysql/es-mysql.iml" filepath="$PROJECT_DIR$/es-mysql/es-mysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/src/main/main.iml" filepath="$PROJECT_DIR$/user-service-provider/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mybatis-analysis/mybatis-analysis.iml" filepath="$PROJECT_DIR$/mybatis-analysis/mybatis-analysis.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty/netty.iml" filepath="$PROJECT_DIR$/netty/netty.iml" />
       <module fileurl="file://$PROJECT_DIR$/order-service-consumer/order-service-consumer.iml" filepath="$PROJECT_DIR$/order-service-consumer/order-service-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shuai.iml" filepath="$PROJECT_DIR$/.idea/shuai.iml" />
