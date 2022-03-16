@@ -4,12 +4,28 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" filepath="$PROJECT_DIR$/user-service-provider/.mvn/.mvn.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlinkTutorial/FlinkTutorial.iml" filepath="$PROJECT_DIR$/FlinkTutorial/FlinkTutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hibernate/Hibernate.iml" filepath="$PROJECT_DIR$/Hibernate/Hibernate.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserBehaviorAnalysis/HotitemsAnalysis/HotitemsAnalysis.iml" filepath="$PROJECT_DIR$/UserBehaviorAnalysis/HotitemsAnalysis/HotitemsAnalysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JUC并发编程/JUC并发编程.iml" filepath="$PROJECT_DIR$/JUC并发编程/JUC并发编程.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVM教程/JVM教程.iml" filepath="$PROJECT_DIR$/JVM教程/JVM教程.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java基础/Java基础.iml" filepath="$PROJECT_DIR$/Java基础/Java基础.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java设计模式/Java设计模式.iml" filepath="$PROJECT_DIR$/Java设计模式/Java设计模式.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kafka/Kafka.iml" filepath="$PROJECT_DIR$/Kafka/Kafka.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kubernetes/Kubernetes.iml" filepath="$PROJECT_DIR$/Kubernetes/Kubernetes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MySql/MySql.iml" filepath="$PROJECT_DIR$/MySql/MySql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mybatis/Mybatis.iml" filepath="$PROJECT_DIR$/Mybatis/Mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Nacos/Nacos.iml" filepath="$PROJECT_DIR$/Nacos/Nacos.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserBehaviorAnalysis/NetworkFlowAnalysis/NetworkFlowAnalysis.iml" filepath="$PROJECT_DIR$/UserBehaviorAnalysis/NetworkFlowAnalysis/NetworkFlowAnalysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Reactor反应式编程/Reactor反应式编程.iml" filepath="$PROJECT_DIR$/Reactor反应式编程/Reactor反应式编程.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Redis/Redis.iml" filepath="$PROJECT_DIR$/Redis/Redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RocketMq/RocketMq.iml" filepath="$PROJECT_DIR$/RocketMq/RocketMq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Storm/Storm.iml" filepath="$PROJECT_DIR$/Storm/Storm.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserBehaviorAnalysis/UserBehaviorAnalysis.iml" filepath="$PROJECT_DIR$/UserBehaviorAnalysis/UserBehaviorAnalysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Webpack/Webpack.iml" filepath="$PROJECT_DIR$/Webpack/Webpack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zookeeper/Zookeeper.iml" filepath="$PROJECT_DIR$/Zookeeper/Zookeeper.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud2021/cloud-provider-payment8001/cloud-provider-payment8001.iml" filepath="$PROJECT_DIR$/cloud2021/cloud-provider-payment8001/cloud-provider-payment8001.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud2021/cloud2021.iml" filepath="$PROJECT_DIR$/cloud2021/cloud2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-cas/demo.iml" filepath="$PROJECT_DIR$/spring-boot-cas/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" filepath="$PROJECT_DIR$/demo-spring-boot-starter/demo-spring-boot-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/elasticsearch/elasticsearch.iml" filepath="$PROJECT_DIR$/elasticsearch/elasticsearch.iml" />
       <module fileurl="file://$PROJECT_DIR$/es-mysql/es-mysql.iml" filepath="$PROJECT_DIR$/es-mysql/es-mysql.iml" />
@@ -17,20 +33,17 @@
       <module fileurl="file://$PROJECT_DIR$/mybatis-analysis/mybatis-analysis.iml" filepath="$PROJECT_DIR$/mybatis-analysis/mybatis-analysis.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty/netty.iml" filepath="$PROJECT_DIR$/netty/netty.iml" />
       <module fileurl="file://$PROJECT_DIR$/order-service-consumer/order-service-consumer.iml" filepath="$PROJECT_DIR$/order-service-consumer/order-service-consumer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/reactor/reactor.iml" filepath="$PROJECT_DIR$/reactor/reactor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rocketmq-demo/rocketmq-demo.iml" filepath="$PROJECT_DIR$/rocketmq-demo/rocketmq-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shuai.iml" filepath="$PROJECT_DIR$/.idea/shuai.iml" />
       <module fileurl="file://$PROJECT_DIR$/shuai-interface/shuai-interface.iml" filepath="$PROJECT_DIR$/shuai-interface/shuai-interface.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spring/spring.iml" filepath="$PROJECT_DIR$/spring/spring.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-cas/spring-boot-cas.iml" filepath="$PROJECT_DIR$/spring-boot-cas/spring-boot-cas.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-source/spring-source.iml" filepath="$PROJECT_DIR$/spring-source/spring-source.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springbootsourcecode/springbootsourcecode.iml" filepath="$PROJECT_DIR$/springbootsourcecode/springbootsourcecode.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud1/springcloud1.iml" filepath="$PROJECT_DIR$/springcloud1/springcloud1.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud1/springcloud-api/springcloudapi.iml" filepath="$PROJECT_DIR$/springcloud1/springcloud-api/springcloudapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springsourcecode/springsourcecode.iml" filepath="$PROJECT_DIR$/springsourcecode/springsourcecode.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/src/test/test.iml" filepath="$PROJECT_DIR$/user-service-provider/src/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service-provider/user-service-provider.iml" filepath="$PROJECT_DIR$/user-service-provider/user-service-provider.iml" />
-      <module fileurl="file://$PROJECT_DIR$/webpack/webpack.iml" filepath="$PROJECT_DIR$/webpack/webpack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/亿级流量电商详情页缓存架构/亿级流量电商详情页缓存架构.iml" filepath="$PROJECT_DIR$/亿级流量电商详情页缓存架构/亿级流量电商详情页缓存架构.iml" />
+      <module fileurl="file://$PROJECT_DIR$/前端/前端.iml" filepath="$PROJECT_DIR$/前端/前端.iml" />
+      <module fileurl="file://$PROJECT_DIR$/电商项目/电商项目.iml" filepath="$PROJECT_DIR$/电商项目/电商项目.iml" />
     </modules>
   </component>
 </project>

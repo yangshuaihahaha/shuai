@@ -17,18 +17,18 @@
         <option value="$PROJECT_DIR$/netty/pom.xml" />
         <option value="$PROJECT_DIR$/elasticsearch/pom.xml" />
         <option value="$PROJECT_DIR$/es-mysql/pom.xml" />
-        <option value="$PROJECT_DIR$/rocketmq-demo/pom.xml" />
         <option value="$PROJECT_DIR$/springcloud1/pom.xml" />
         <option value="$PROJECT_DIR$/springsourcecode/pom.xml" />
-        <option value="$PROJECT_DIR$/springbootsourcecode/pom.xml" />
         <option value="$PROJECT_DIR$/demo-spring-boot-starter/pom.xml" />
         <option value="$PROJECT_DIR$/spring-boot-cas/pom.xml" />
         <option value="$PROJECT_DIR$/cloud2021/pom.xml" />
-        <option value="$PROJECT_DIR$/reactor/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis-source-code/pom.xml" />
         <option value="$PROJECT_DIR$/FlinkTutorial/pom.xml" />
         <option value="$PROJECT_DIR$/UserBehaviorAnalysis/pom.xml" />
         <option value="$PROJECT_DIR$/Kubernetes/pom.xml" />
+        <option value="$PROJECT_DIR$/RocketMq1/pom.xml" />
+        <option value="$PROJECT_DIR$/电商项目/pom.xml" />
+        <option value="$PROJECT_DIR$/亿级流量电商详情页缓存架构/pom.xml" />
       </list>
     </option>
   </component>
