@@ -6,6 +6,8 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
+import java.util.List;
+
 public class Consumer {
     public static void main(String[] args) throws Exception {
         //1.创建消息消费者consumer，并制定消费组名
@@ -23,5 +25,9 @@ public class Consumer {
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
         consumer.start();
+    }
+
+    private Object getListFisrt(List<Object> data) {
+        return data.get(0);
     }
 }

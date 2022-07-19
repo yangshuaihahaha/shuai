@@ -1,49 +1,646 @@
-# k8s基础概念
-Mesos Apache ------ 分布式资源管理框架
-Docker Swarm ------ Docker开放的框架
-Kubernetes ------ Google开发的
-    特点：
-        轻量级：消耗资源小
-        开源
-        弹性伸缩
-        负载均衡：IPVS
-基础概念：什么事Pod 控制器类型   K8s 网络通讯模式
-K8s：构建集群
-资源清单：什么是资源  资源清单的语法 编写Pod   掌握Pod的生命周期
-Pod控制器：掌握各种控制器的特点以及使用定义的方式
-服务发现：掌握svc原理及其构建方式
-存储：掌握多种存储类型的特点，并且能够在不同的环境中选择合适的存储方案（有自己的见解）
-调度器：掌握调度器原理 能够根据要求把Pod定义到想要的节点运行
-安全：集群认证 鉴权  访问控制    原理及流程
-HELM：Linux yum  掌握HELM原理    HELM模版自定义 HELM部署一些常用插件 
-运维：k8s源码修改  k8s高可用构建
+# 什么是Kubernetes
+Kubernetes是一个容器管理工具。可以提供容器的部署、扩容和负载均衡等。
+真实的生产环境会包含多个容器，而这些容器还会跨越多个主机部署。
+Kubernetes 提供这些容器所需的的编排与管理能力。
 
 
-etcd：官方将它定位成一个可信赖的分布式键之存储服务，它能够为整个分布式集群存储一些关键数据，协助分布式集群正常运转
+# 简述Kubernetes和Docker的关系
+Docker提供容器的生命周期管理和Docker镜像构建运行时容器。它的主要作用是将应用程序运行时所需的依赖打包到一个容器中，从而实现了可移植性的优点。
+但是Docker作为单一的容器技术，我们在生产环境中，往往会有大规模的容器化部署。
+而Docker难以支撑大规模容器化部署的要求，所以就有了Kubernetes。
+Kubernetes可以对大规模容器进行组织和管理。在Docker的基础上，为容器化的应用提供部署、动态伸缩和负载均衡等一系列完整功能，提高了大规模容器集群管理的便捷性
 
 
-数据服务分类：
-    有状态服务：DBMS（数据库管理系统）
-    无状态服务：LVS APACHE
+
+# 基础概念
+Master（主节点）：
+    控制 Kubernetes 节点的机器，也是创建作业任务的地方。
+Node（节点）：
+    这些机器在 Kubernetes 主节点的控制下执行被分配的任务。
+Pod：
+    由一个或多个容器构成的集合，作为一个整体被部署到一个单一节点。
+    同一个 pod 中的容器共享 IP 地址、进程间通讯（IPC）、主机名以及其它资源。
+    Pod 将底层容器的网络和存储抽象出来，使得集群内的容器迁移更为便捷。
+Replication controller（复制控制器）： 
+    控制一个 pod 在集群上运行的实例数量。
+Service（服务）：
+    Service提供了一个统一的服务访问入口以及服务代理和发现机制，关联多个相同Label的Pod。
+    将服务内容与具体的 pod 分离。Kubernetes 服务代理负责自动将服务请求分发到正确的 pod 处，不管 pod 移动到集群中的什么位置，甚至可以被替换掉。
+kubectl： 
+    这是 Kubernetes 的命令行配置工具。
+Label：
+    Kubernetes中的Label实质是一系列的Key/Value键值对，其中key与value可自定义。
+    Label可以附加到各种资源对象上，如Node、Pod、Service、RC等。
+    一个资源对象可以定义任意数量的Label，同一个Label也可以被添加到任意数量的资源对象上去。
+    Kubernetes通过Label Selector（标签选择器）查询和筛选资源对象。
+Volume：
+    Volume是Pod中能够被多个容器访问的共享目录，Kubernetes中的Volume是定义在Pod上，
+    可以被一个或多个Pod中的容器挂载到某个目录下。
+Namespace：
+    Namespace用于实现多租户的资源隔离，可将集群内部的资源对象分配到不同的Namespace中
+    形成逻辑上的不同项目、小组或用户组，便于不同的Namespace在共享使用整个集群的资源的同时还能被分别管理。
 
 
-# k8s架构
-![](./image/K8s架构.png)
-master：
-    Api server：所有服务访问统一入口
-    ControllerManager：维持副本期望数
-    Scheduler：负责介绍任务，选择合适的节点进行分配任务
-    Etcd：键值对数据库 存储k8s集群所有的主要信息（持久化）
-node：
-    Kubelet：直接跟容器引擎交互实现容器的生命周期管理
-    Kube-proxy：负责写入规则至IPTABLES、IPVS实现服务映射访问
-其他插件：
-    COREDNS：可以为集群中的SVC创建一个域名IP的对应关系解析
-    DASHBOARD：给k8s集群提供一个B/S结构访问体系
-    INGRESS CONTROLLER：官方只能实现4层代理，INGRESS可以实现7层
-    FEDETATION：提供一个可以跨集群中心多K8S统一管理功能
-    PROMETHEUS：提供k8s集群的监控能力
-    ELK：提供K8s集群日志统一分析介入平台
+
+
+# Minikube、Kubectl、Kubelet分别是什么
+Minikube是一种可以在本地轻松运行一个单节点Kubernetes群集的工具
+Kubectl是一个命令行工具，可以使用该工具控制Kubernetes集群管理器，如检查群集资源，创建、删除和更新组件，查看应用程序。
+Kubelet是一个代理服务，它在每个节点上运行，并使从服务器与主服务器通信。
+
+
+
+
+
+# 数据服务分类：
+有状态服务：DBMS（数据库管理系统）
+    有状态的服务需要在本地存储持久化数据，典型的是分布式数据库的应用
+    分布式节点实例之间有依赖的拓扑关系.比如,主从关系
+    如果K8S停止分布式集群中任 一实例pod,就可能会导致数据丢失或者集群的crash.
+无状态服务：LVS APACHE
+    无状态服务不会在本地存储持久化数据.多个服务实例对于同一个用户请求的响应结果是完全一致的
+    这种多服务实例之间是没有依赖关系,比如web应用,在k8s控制器 中动态启停无状态服务的pod并不会对其它的pod产生影响.
+
+
+
+
+# Master节点架构
+![img.png](image/Master主节点架构.png)
+kube-apiserver：
+    对外暴露 K8S 的 api 接口，是外界进行资源操作的唯一入口
+    提供认证、授权、访问控制、API 注册和发现等机制
+etcd：
+    etcd 是兼具一致性和高可用性的键值数据库，可以作为保存 Kubernetes 所有集群数据的后台数据库。
+    Kubernetes 集群的 etcd 数据库通常需要有个备份计划
+kube-scheduler
+    主节点上的组件，该组件监视那些新创建的未指定运行节点的 Pod，并选择节点让 Pod 在上面运行。
+    所有对 k8s 的集群操作，都必须经过主节点进行调度
+kube-controller-manager
+    在主节点上运行控制器组件
+    这些控制器包括:
+        节点控制器(Node Controller): 负责在节点出现故障时进行通知和响应。
+        副本控制器(Replication Controller): 负责为系统中的每个副本控制器对象维护正确数量的 Pod。
+        端点控制器(Endpoints Controller): 填充端点(Endpoints)对象(即加入 Service与 Pod)。
+        服务帐户和令牌控制器(Service Account & Token Controllers): 为新的命名空间创建默认帐户和 API 访问令牌
+
+
+# Node节点架构
+![img.png](image/Node节点架构.png)
+kubelet：
+    一个在集群中每个节点上运行的代理。它保证容器都运行在 Pod 中。
+    负责维护容器的生命周期，同时也负责 Volume(CSI)和网络(CNI)的管理;
+kube-proxy
+    负责为 Service 提供 cluster 内部的服务发现和负载均衡;
+容器运行环境(Container Runtime)
+    容器运行环境是负责运行容器的软件。
+    Kubernetes 支持多个容器运行环境: Docker、 containerd、cri-o、 rktlet 以及任何实现 Kubernetes CRI (容器运行环境接口)。
+fluentd
+    是一个守护进程，它有助于提供集群层面日志 集群层面的日志
+
+
+
+
+
+
+# k8s集群安装
+kubeadm 是官方社区推出的一个用于快速部署 kubernetes 集群的工具。 这个工具能通过两条指令完成一个 kubernetes 集群的部署:
+1，创建一个Master节点
+```kubeadm init```
+2，将一个 Node 节点加入到当前集群中
+```kubeadm join <Master 节点的 IP 和端口 >```
+
+## 部署步骤
+安装步骤总结：
+    1，在所有节点上安装 Docker 和 kubeadm
+    2，部署 Kubernetes Master
+    3，部署容器网络插件
+    4，部署 Kubernetes Node，将节点加入 Kubernetes 集群中
+详细步骤：
+    1， 设置 linux 环境(三个节点都执行)
+    ```
+    ## 关闭防火墙:
+        systemctl stop firewalld systemctl disable firewalld
+    ## 关闭 selinux:
+        sed -i 's/enforcing/disabled/' /etc/selinux/config setenforce 0
+    ## 关闭 swap:
+        swapoff -a 临时
+        sed -ri 's/.*swap.*/#&/' /etc/fstab 永久 free -g 验证，swap 必须为 0;
+    ## 添加主机名与 IP 对应关系 
+        vi /etc/hosts
+        10.0.2.15 k8s-node1
+        10.0.2.24 k8s-node2
+        10.0.2.25 k8s-node3
+        hostnamectl set-hostname <newhostname>:指定新的 hostname su 切换过来
+    ## 将桥接的 IPv4 流量传递到 iptables 的链: 
+        cat > /etc/sysctl.d/k8s.conf << EOF 
+        net.bridge.bridge-nf-call-ip6tables = 1 
+        net.bridge.bridge-nf-call-iptables = 1
+        EOF
+        sysctl --system
+    ## 疑难问题: 遇见提示是只读的文件系统，运行如下命令 
+        mount -o remount rw /
+        date 查看时间 (可选)
+        yum install -y ntpdate
+        ntpdate time.windows.com 同步最新时间
+    ```
+    2，所有节点安装 Docker、kubeadm、kubelet、kubectl
+    （1）卸载系统之前的 docker
+        ```
+        sudo yum remove docker \ docker-client \
+        docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine
+        ```
+    （2）安装 Docker-CE
+        ```
+        ## 安装必须的依赖
+            sudo yum install -y yum-utils \
+            device-mapper-persistent-data \ lvm2
+        ## 设置 docker repo 的 yum 位置 
+            sudo yum-config-manager \
+            --add-repo \
+            https://download.docker.com/linux/centos/docker-ce.repo
+        ## 安装 docker，以及 docker-cli
+            sudo yum install -y docker-ce docker-ce-cli containerd.io
+        ```
+    （3）配置 docker 加速
+        ```
+        sudo mkdir -p /etc/docker
+        sudo tee /etc/docker/daemon.json <<-'EOF' {
+        "registry-mirrors": ["https://82m9ar63.mirror.aliyuncs.com"] }
+        EOF
+        sudo systemctl daemon-reload sudo systemctl restart docker
+        ```
+    （4）启动 docker & 设置 docker 开机自启
+        ```
+        systemctl enable docker
+        ```
+    （5）安装 kubeadm，kubelet 和 kubectl
+        ```
+        yum list|grep kube
+        yum install -y kubelet-1.17.3 kubeadm-1.17.3 kubectl-1.17.3
+        systemctl enable kubelet 
+        systemctl start kubelet
+        ```
+    3，部署 k8s-master
+    （1）master 节点初始化
+        ```
+        $ kubeadm init \
+        --apiserver-advertise-address=10.0.2.15 \
+        --image-repository registry.cn-hangzhou.aliyuncs.com/google_containers \ --kubernetes-version v1.17.3 \
+        --service-cidr=10.96.0.0/16 \
+        --pod-network-cidr=10.244.0.0/16
+        ```
+        由于默认拉取镜像地址 k8s.gcr.io 国内无法访问，这里指定阿里云镜像仓库地址。可以手动 按照我们的 images.sh 先拉取镜像，
+    （2）测试 kubectl(主节点执行)
+        ```
+        mkdir -p $HOME/.kube
+        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config sudo chown $(id -u):$(id -g) $HOME/.kube/config
+        ```
+        $ kubectl get nodes 获取所有节点
+        目前 master 状态为 notready。等待网络加入完成即可。
+        kubeadm join 10.0.2.15:6443 --token 8mgmlh.cgtgsp3samkvpksn \ --discovery-token-ca-cert-hash
+        sha256:3cf99aa2e6bfc114c5490a7c6dffcf200b670af21c5a662c299b6de606023f85
+    4，安装 Pod 网络插件(CNI)
+        ```$ kubectl apply -f \ https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml```
+    5，加入 Kubernetes Node
+        在 Node 节点执行。 向集群添加新节点，执行在 kubeadm init 输出的 kubeadm join 命令
+
+
+
+
+
+
+
+# KubeSphere
+默认的 dashboard 没啥用，我们用 kubesphere 可以打通全部的 devops 链路。 Kubesphere 集成了很多套件，集群要求较高
+KubeSphere 是一款面向云原生设计的开源项目，在目前主流容器调度平台 Kubernetes 之 上构建的分布式多租户容器管理平台
+提供简单易用的操作界面以及向导式操作方式，在降 低用户使用容器调度平台学习成本的同时，极大降低开发、测试、运维的日常工作的复杂度。
+
+## 安装前提环境
+1，安装 helm(master 节点执行)
+2，安装 Tiller(master 执行)
+3，安装 OpenEBS(master 执行)
+
+## 最小化安装
+KubeSphere 最小化安装:
+```kubectl apply -f \ https://raw.githubusercontent.com/kubesphere/ks-installer/master/kubesphere-minimal.yaml```
+查看安装日志，请耐心等待安装成功。
+
+## 完整化安装
+完整化安装主要是安装KubeSphere一些扩展模块，比如内置的DevOps系统、告警通知模块等
+比如开启安装 DevOps 系统
+    通过修改 ks-installer 的 configmap 可以选装组件，执行以下命令（kubectl 命令需要以 root 用户执行）。
+    ```$ kubectl edit cm -n kubesphere-system ks-installer```
+    参考如下修改 ConfigMap
+    ```
+    devops:
+          enabled: True
+          jenkinsMemoryLim: 2Gi
+          jenkinsMemoryReq: 1500Mi
+          jenkinsVolumeSize: 8Gi
+          jenkinsJavaOpts_Xms: 512m
+          jenkinsJavaOpts_Xmx: 512m
+          jenkinsJavaOpts_MaxRAM: 2g
+          sonarqube:
+            enabled: True
+    ```
+
+## 建立多租户系统
+KubeSphere 多租户体系中，将资源划分为以下三个层级：
+- 集群
+- 企业空间
+- 项目和 DevOps 工程
+针对不同层级的资源都可以灵活地定制角色用以划分用户的权限范围，实现不同用户之间的资源隔离。
+![img.png](image/kubesphere多租户系统.png)
+## 权限管理模型
+常见的权限管理模型有 ACL、DAC、MAC、RBAC、ABAC 这几类。
+在 KubeSphere 中我们借助 RBAC 权限管理模型来做用户的权限控制，
+用户并不直接和资源进行关联，而是经由角色定义来进行权限控制。
+
+
+# 基础使用（部署WordPress）
+## 创建 MySQL 密钥
+（1）以项目普通用户 project-regular登录 KubeSphere，在当前项目下左侧菜单栏的 配置中心 选择 密钥，点击 创建。
+    ![img.png](image/创建MySQL密钥.png)
+（2）填写密钥的基本信息，完成后点击 下一步。
+    - 名称：作为 MySQL 容器中环境变量的名称，可自定义，例如 mysql-secret
+    - 别名：别名可以由任意字符组成，帮助您更好的区分资源，例如 MySQL 密钥
+    - 描述信息：简单介绍该密钥，如 MySQL 初始密码
+（3）密钥设置页，填写如下信息，完成后点击 创建。
+    - 类型：选择 默认(Opaque)
+    - Data：Data 键值对填写 MYSQL_ROOT_PASSWORD和 123456
+    ![img.png](image/密钥设置.png)
+## 创建 WordPress 密钥
+同上，创建一个 WordPress 密钥，Data 键值对填写 WORDPRESS_DB_PASSWORD和 123456。此时两个密钥都创建完成。
+![img.png](image/创建WordPress密钥.png)
+## 创建存储卷
+1，在当前项目下左侧菜单栏的 存储卷，点击 创建，基本信息如下。
+    - 名称：wordpress-pvc
+    - 别名：Wordpress 持久化存储卷
+    - 描述信息：Wordpress PVC
+2，完成后点击 下一步，存储类型默认 local，访问模式和存储卷容量也可以使用默认值，点击 下一步，直接创建即可。
+    ![img.png](image/创建存储卷.png)
+## 创建应用
+### 添加 MySQL 组件
+1，在左侧菜单栏选择 应用负载 → 应用，然后点击 部署新应用。
+    ![img.png](image/部署新应用.png)
+2，基本信息中，参考如下填写，完成后在右侧点击 添加组件。
+    - 应用名称：必填，起一个简洁明了的名称，便于用户浏览和搜索，例如填写 wordpress
+    - 描述信息：简单介绍该工作负载，方便用户进一步了解
+3，Mysql组件信息
+    - 名称： mysql
+    - 组件版本：v1
+    - 别名：MySQL 数据库
+    - 负载类型：选择 有状态服务
+    ![img.png](image/MySQL组件信息.png)
+4，点击 添加容器镜像，镜像填写 mysql:5.6（应指定镜像版本号)，然后按回车键或点击 DockerHub，点击 使用默认端口。
+    ![img.png](image/添加容器镜像.png)
+5，下滑至环境变量，在此勾选 环境变量，然后选择 引用配置文件或密钥，名称填写为 MYSQL_ROOT_PASSWORD，下拉框中选择密钥为 mysql-secret和 MYSQL_ROOT_PASSWORD。
+    ![img.png](image/勾选环境变量.png)
+6，点击 添加存储卷模板，为 MySQL 创建一个 PVC 实现数据持久化。
+    ![img.png](image/添加存储卷.png)
+    ![img.png](image/添加存储卷2.png)
+    存储卷名称：必填，起一个简洁明了的名称，便于用户浏览和搜索，此处填写 mysql-pvc
+    存储类型：选择集群已有的存储类型，如 Local
+    容量和访问模式：容量默认 10 Gi，访问模式默认 ReadWriteOnce (单个节点读写)
+    挂载路径：存储卷在容器内的挂载路径，选择 读写，路径填写 /var/lib/mysql
+## 添加WordPress组件
+1，参考如下提示完成 WordPress 组件信息：
+    - 名称： wordpress
+    - 组件版本：v1
+    - 别名：Wordpress前端
+    - 负载类型：默认 无状态服务
+    ![img.png](image/添加WordPress组件.png)
+2，点击 添加容器镜像，镜像填写 wordpress:4.8-apache（应指定镜像版本号)，然后按回车键或点击 DockerHub，点击 使用默认端口。
+    ![img.png](image/添加wordpress容器镜像.png)
+3，下滑至环境变量，在此勾选 环境变量，这里需要添加两个环境变量：
+    - 点击 引用配置文件或密钥，名称填写 WORDPRESS_DB_PASSWORD，选择在第一步创建的配置 (Secret) wordpress-secret和 WORDPRESS_DB_PASSWORD。
+    - 点击 添加环境变量，名称填写 WORDPRESS_DB_HOST，值填写 mysql，对应的是上一步创建 MySQL 服务的名称，否则无法连接 MySQL 数据库。
+    ![img.png](image/添加WordPress环境变量.png)
+4，点击 添加存储卷，选择已有存储卷 wordpress-pvc，访问模式改为 读写，容器挂载路径 /var/www/html。完成后点击 √。
+    ![img.png](image/添加WordPress存储卷.png)
+5，检查 WordPress 组件信息无误后，再次点击 √，此时 MySQL 和 WordPress 组件信息都已添加完成，点击 创建。
+
+
+
+
+
+
+
+
+# DevOps
+1，项目开发需要考虑的维度
+    Dev:怎么开发? 
+    Ops:怎么运维? 
+    高并发:怎么承担高并发 
+    高可用:怎么做到高可用
+2，什么是 DevOps
+    ![img.png](image/DevOps.png)
+    微服务，服务自治。
+    DevOps: Development 和 Operations 的组合
+    - DevOps 看作开发(软件工程)、技术运营和质量保障(QA)三者的交集。
+    - 突出重视软件开发人员和运维人员的沟通合作，通过自动化流程来使得软件构建、测试、 发布更加快捷、频繁和可靠。
+    - DevOps 希望做到的是软件产品交付过程中 IT 工具链的打通，使得各个团队减少时间损 耗，更加高效地协同工作。专家们总结出了下面这个 DevOps 能力图，良好的闭环可以大大 增加整体的产出。
+3，什么是 CI&CD
+    ![img.png](image/CI&CD.png)
+    （1）持续集成(Continuous Integration)
+        - 持续集成是指软件个人研发的部分向软件整体部分交付，频繁进行集成以便更快地发现 其中的错误。“持续集成”源自于极限编程(XP)，是 XP 最初的 12 种实践之一。
+        - CI 需要具备这些:
+            - 全面的自动化测试。这是实践持续集成&持续部署的基础，同时，选择合适的自动化测试工具也极其重要;
+            - 灵活的基础设施。容器，虚拟机的存在让开发人员和 QA 人员不必再大费周折;
+            - 版本控制工具。如 Git，CVS，SVN 等;
+            - 自动化的构建和软件发布流程的工具，如 Jenkins，flow.ci;
+            - 反馈机制。如构建/测试的失败，可以快速地反馈到相关负责人，以尽快解决达到一个更稳定的版本。
+    （2）持续交付(Continuous Delivery)
+        持续交付在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境的「类生产环境」 (production-like environments)中。持续交付优先于整个产品生命周期的软件部署，建立 在高水平自动化持续集成之上。
+        持续交付和持续集成的优点非常相似:
+            - 快速发布。能够应对业务需求，并更快地实现软件价值。
+            - 编码->测试->上线->交付的频繁迭代周期缩短，同时获得迅速反馈;
+            - 高质量的软件发布标准。整个交付过程标准化、可重复、可靠，
+            - 整个交付过程进度可视化，方便团队人员了解项目成熟度; 
+            - 更先进的团队协作方式。从需求分析、产品的用户体验到交互 设计、开发、测试、运维等角色密切协作，相比于传统的瀑布式软件团队，更少浪费。
+    （3）持续部署(Continuous Deployment)
+        持续部署是指当交付的代码通过评审之后，自动部署到生产环境中。持续部署是持续交付的 最高阶段。这意味着，所有通过了一系列的自动化测试的改动都将自动部署到生产环境。它 也可以被称为“Continuous Release”。
+
+
+
+
+
+# Kubesphere中的Devops功能
+![img.png](image/简单说明流水线完整工作过程.png)
+阶段一. 从Github检出我们的代码
+阶段二. Unit test: 单元测试
+阶段三. SonarQube 进行代码质量检测
+阶段四. 把我们的代码构建成Docker镜像
+阶段五. 将镜像推送至Dockerhub或者阿里云的镜像仓库
+阶段六. Deploy to dev: 将 master 分支部署到 Dev 环境，此阶段需要审核。
+阶段七. Push with tag: 生成 tag 并 release 到 GitHub，并推送到 DockerHub。
+阶段八. Deploy to production: 将发布的 tag 部署到 Production 环境。
+
+
+
+
+
+
+# 使用Kubesphere创建Mysql集群
+1，创建一个有状态的服务mysql-master，容器副本数量为1。
+2，添加容器镜像，版本是5.7
+3，设置环境变量，主要是设置用户名密码
+4，设置配置文件和挂载
+
+然后同样的步骤创建两个slaver：mysql-master1，mysql-master2
+
+这样我们就得到了3个mysql服务器。
+然后就可以进行主从同步的配置了。
+
+同理我们可以这样进行redis集群的搭建，以及sentinel、nacos、ElasticSearch、集群搭RocketMQ建等等
+
+
+
+
+
+# k8s部署应用的流程
+1，将我们项目中的每一个微服务都打包成一个镜像，然后上传到Dockerhub
+    这就需要在每一个微服务项目下面准备一个Dockerfile，Docker按照这个Dockerfile将项目打包成镜像
+2，然后将打包成的微服务镜像上传到Dockerhub
+    因为在k8s中创建服务，必须是从Dockerhub中拉去的镜像
+3，还需要为每个微服务项目生成一个k8s部署描述文件
+    Jenkins自动创建服务Pod，就是根据这个描述文件来的
+4，我们还可以指定每个微服务的副本数，然后再将这些副本封装成一个service对外提供服务
+这里的所有过程都是通过Jenkins持续集成来实现的
+
+
+# 生产环境配置抽取
+之前的配置中我们都使用的是ip地址的方式配置依赖服务的ip和端口号，比如：
+spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
+spring.redis.host=192.168.56.10
+
+这样的ip地址访问是难记住的。所以这里我们改成域名的方式。
+以nacos为例，我们再创建一个nacos-service，指定它的应用负载到原来的nacos服务。
+然后指定访问类型是以"集群内部通过服务后端Endpoint IP直接访问服务Headless"也就是以域名的方式访问
+这样我们就可以域名的方式访问nacos，比如：spring.cloud.nacos.discovery.server-addr=nacos-service.gulimall:8848
+
+
+
+# 创建微服务的Dockerfile
+每个微服务下面的dockerfile基本上都这样
+docker就可以按照dockerfile打包成镜像
+```
+FROM java:8
+EXPOSE 8080
+VOLUME /temp
+ADD target/hello.jar /app.jar
+RUN bash -c 'touch /app.jar'
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+# 创建k8s部署描述文件
+该描述文件放会在每个微服务下面创建一个deploy文件夹。
+文件内容示例devops-sample.yaml
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kubesphere
+    component: ks-sample
+    tier: backend
+  name: ks-sample
+  namespace: kubesphere-sample-prod
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubesphere
+      component: ks-sample
+      tier: backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 100%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: kubesphere
+        component: ks-sample
+        tier: backend
+    spec:
+      containers:
+        - env:
+            - name: CACHE_IGNORE
+              value: js|html
+            - name: CACHE_PUBLIC_EXPIRATION
+              value: 3d
+          image: $REGISTRY/$HARBOR_NAMESPACE/$APP_NAME:$TAG_NAME
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            timeoutSeconds: 10
+            failureThreshold: 30
+            periodSeconds: 5
+          imagePullPolicy: Always
+          name: ks
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 300m
+              memory: 600Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+```
+
+
+
+# 编写Jenkinsfile文件，部署每一个微服务
+```yml
+pipeline {
+  agent {
+    node {
+      label 'maven'
+    }
+  }
+参数化构建，这里可以接受外面传进来的参数
+    parameters {
+        string(name:'TAG_NAME',defaultValue: '',description:'')
+    }
+环境变量
+    environment {
+        DOCKER_CREDENTIAL_ID = 'dockerhub-id'
+        GITHUB_CREDENTIAL_ID = 'github-id'
+        KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
+        REGISTRY = 'docker.io'
+        DOCKERHUB_NAMESPACE = 'docker_username'
+        GITHUB_ACCOUNT = 'kubesphere'
+        APP_NAME = 'devops-java-sample'
+    }
+
+    stages {
+        checkout代码
+        stage ('checkout scm') {
+            steps {
+                checkout(scm)
+            }
+        }
+单元测试
+        stage ('unit test') {
+            steps {
+                container ('maven') {
+                    sh 'mvn clean  -gs `pwd`/configuration/settings.xml test'
+                }
+            }
+        }
+ 构建镜像，推送到Dockerhub
+        stage ('build & push') {
+            steps {
+                container ('maven') {
+        打包镜像
+                    sh 'mvn  -Dmaven.test.skip=true -gs `pwd`/configuration/settings.xml clean package'
+                    sh 'docker build -f Dockerfile-online -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
+                    withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) {
+                        sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+                        sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER'
+                    }
+                }
+            }
+        }
+push最新版本
+        stage('push latest'){
+           when{
+             branch 'master'
+           }
+           steps{
+                container ('maven') {
+                  sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest '
+                  sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest '
+                }
+           }
+        }
+发布到dev环境
+        stage('deploy to dev') {
+          when{
+            branch 'master'
+          }
+          steps {
+            input(id: 'deploy-to-dev', message: 'deploy to dev?')
+            kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+          }
+        }
+        stage('push with tag'){
+          when{
+            expression{
+              return params.TAG_NAME =~ /v.*/
+            }
+          }
+          steps {
+              container ('maven') {
+                input(id: 'release-image-with-tag', message: 'release image with tag?')
+                  withCredentials([usernamePassword(credentialsId: "$GITHUB_CREDENTIAL_ID", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh 'git config --global user.email "kubesphere@yunify.com" '
+                    sh 'git config --global user.name "kubesphere" '
+                    sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
+                    sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/devops-java-sample.git --tags --ipv4'
+                  }
+                sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+                sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+          }
+          }
+        }
+        stage('deploy to production') {
+          when{
+            expression{
+              return params.TAG_NAME =~ /v.*/
+            }
+          }
+          steps {
+            input(id: 'deploy-to-production', message: 'deploy to production?')
+            kubernetesDeploy(configs: 'deploy/prod-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+          }
+        }
+    }
+}
+```
+这里构建完Jenkinsfile之后我们就可以使用这个流水线了，我们需要运行多次来启动每一个微服务，如下图所示
+在运行的时候可以输入Project Name，那么就可以构建某一个微服务了
+![img.png](image/使用devops流水线构建微服务.png)
+
+
+
+
+
+# 前置nginx的部署
+因为我们的nginx里面有动静分离的所以需要我们自己打包上传到dockerhub
+然后使用Kubesphere部署到k8s集群。
+![img.png](image/前置nginx的部署.png)
+如图所示，我们需要有一个ingress-controller前置网关域名路由。
+将我们的请求访问都转发给动静分离的nginx，然后nginx再将请求准发给我们的网关。
+
+在Kubesphere中前置网关路由是非常简单的
+![img.png](image/Kubesphere前置网关路由.png)
+如图所示，只要我们访问了gulimall.com就转发给gulimall-nginx这个服务。
+
+
+
+
+
+
+创建3个pod分别是mysql-master、mysql-slave1、mysql-slave2
+
+
+
+
+
+
+
 
 # Pod控制器
 类型：
@@ -101,6 +698,8 @@ Pod控制器类型
         ![](./image/CronJob Spec.png)
         ![](./image/CronJob Spec2.png)
         ![](./image/CronJob部署应用.png)
+
+
 
 
 # Service
@@ -188,6 +787,11 @@ Kubernetes + Flannel
         存储管理flannel可分配的ip地址段资源
         监控etcd中每个pod的实际地址，并在内存中建立维护pod节点路由表
 
+
+
+
+
+
 # 资源清单
 什么是资源：
     K8s中所有内容都抽象为资源，资源实例化之后，叫做对象
@@ -264,13 +868,16 @@ init容器：
         ![](./image/liveness-tcp.png)
         就绪检测存活检测一样，只需要将livenessProbe改为readlinessProbe即可
 
-
 start、stop、相位
     ![](./image/启动、退出动作.png)
 
 Pod phase可能存在的可能性：
     也就是Pod的status
     ![](./image/Pod phase可能存在的值.png)
+
+
+
+
 
 # ingress
 ![](./image/Nginx-Ingress.png)
@@ -283,6 +890,10 @@ Pod phase可能存在的可能性：
 2，Ingress HTTPS代理访问
 ![](./image/Ingress HTTPS代理访问-证书以及cert存储方式.png)
 ![](./image/Ingress HTTPS代理访问-ingress.yaml.png)
+
+
+
+
 
 
 # 存储

@@ -170,15 +170,13 @@
 ![](image\传播特性.jpg)
 
 ### 11、Spring 中用到了那些设计模式？
-
-- 代理模式—在AOP中被用的比较多。
-- 单例模式—在spring配置文件中定义的bean默认为单例模式。
-- 模板方法—用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。
-- 工厂模式—BeanFactory用来创建对象的实例。
-- 适配器--spring aop
-- 装饰器--spring data hashmapper
-- 观察者-- spring 事件驱动模型
-- 回调--Spring Aware回调接口
+工厂模式 : Spring使用工厂模式通过 BeanFactory、ApplicationContext 创建 bean 对象。
+单例模式 : Spring 中的 Bean 默认都是单例的。
+代理模式 : Spring AOP 功能的实现。
+模板方法模式 : Spring 中 jdbcTemplate、hibernateTemplate 等以 Template 结尾的对数据库操作的类，它们就使用到了模板模式。
+装饰器模式 : 我们的项目需要连接多个数据库，而且不同的客户在每次访问中根据需要会去访问不同的数据库。这种模式让我们可以根据客户的需求能够动态切换不同的数据源。
+观察者模式: Spring 事件驱动模型就是观察者模式很经典的一个应用。
+适配器模式 :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配Controller。
 
 ### 12、Spring如何解决循环依赖？
 

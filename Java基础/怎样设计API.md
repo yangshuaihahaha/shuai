@@ -96,8 +96,7 @@ public class JdbcUtils {
 
 我们可对JdbcUtils的getConnection方法作以改造，使其满足最小知识原则。我们应该只提供getConnection需要的信息。
 ```
-public static Connection getConnection(@NonNull String driver, @NonNull String jdbcUrl, @NonNull String username,
-                                           @NonNull String password) throws ClassNotFoundException, SQLException {
+public static Connection getConnection(@NonNull String driver, @NonNull String jdbcUrl, @NonNull String username, @NonNull String password) throws ClassNotFoundException, SQLException {
     Class.forName(driver);
     return DriverManager.getConnection(jdbcUrl, username, password);
 }

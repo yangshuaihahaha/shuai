@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="springcloudapi" />
         <module name="HotitemsAnalysis" />
+        <module name="Tomcat" />
         <module name="demo-spring-boot-starter" />
         <module name="es-mysql" />
         <module name="cloud-provider-payment8001" />
@@ -52,8 +53,9 @@
       <module name="Spring" target="1.5" />
       <module name="spring-boot-cas" target="1.8" />
       <module name="springbootsourcecode" target="1.8" />
-      <module name="springcloud1" target="1.5" />
+      <module name="SpringCloud" target="1.5" />
       <module name="springcloudapi" target="1.5" />
+      <module name="Tomcat" target="8" />
       <module name="user-service-provider" target="1.8" />
       <module name="UserBehaviorAnalysis" target="1.8" />
       <module name="亿级流量电商详情页缓存架构" target="8" />

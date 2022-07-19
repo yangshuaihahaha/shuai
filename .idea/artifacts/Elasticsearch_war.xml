@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Elasticsearch:war">
+    <output-path>$PROJECT_DIR$/Elasticsearch/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Elasticsearch</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="elasticsearch-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Elasticsearch:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -281,8 +281,6 @@ SyncTransmission
                                     Context.getService(SyncService.class).saveOrUpdate(o);
                                 }
                                 return;
-
-数据同步使用netty
 长连接模式：
     服务器性能还不错，客户端数量比较少，对"报文数据"实时性要求比较高所以使用的是长连接模式
     1，创建连接
