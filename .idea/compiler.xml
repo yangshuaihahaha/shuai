@@ -14,8 +14,8 @@
         <module name="es-mysql" />
         <module name="cloud-provider-payment8001" />
         <module name="spring-boot-cas" />
-        <module name="demo" />
         <module name="Flink" />
+        <module name="demo" />
         <module name="user-service-provider" />
         <module name="NetworkFlowAnalysis" />
         <module name="shuai-interface" />
